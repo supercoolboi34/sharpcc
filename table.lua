@@ -55,18 +55,18 @@ script_key="KEY HERE"; -- // Key
 
 getgenv().script_key = script_key;
 
--- # DO NOT TOUCH FOR COLORING
+-- # DO NOT TOUCH FOR COLORING & On/Off
 local On  = true;
 local Off = false;
 local V2  = Vector2.new;
 local V3  = Vector3.new;
 local C3  = Color3.fromRGB;
--- # DO NOT TOUCH FOR COLORING
+-- # DO NOT TOUCH FOR COLORING & On/Off
 
 -- # Explaining: .0 are decimal On = true, false = Off keep it that way!
 
 getgenv().Sharp = {
-    Threading = "RenderStepped", -- (RenderStepped, Stepped, Heartbeat)
+    Threading = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
     Global = {
         Death = {Self = On, Target = On},
         Team = Off, -- Universal
@@ -82,7 +82,7 @@ getgenv().Sharp = {
 
         Visualizing = {
             SendNotification = Off,
-            Box = {Visible = Off, Size = V3(2, 5, 2), Color = C3(0, 0, 255)}, -- Integers, Color code
+            Box = {Visible = Off, Size = V3(2, 5, 2), Color = C3(0, 0, 255)}, -- [Integers, Color code]
         },
 
         Prediction = {
