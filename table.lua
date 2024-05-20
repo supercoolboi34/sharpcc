@@ -101,4 +101,4 @@ getgenv().Sharp = {
 }
 
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/2113a5bc0b73774bc3837e053013a735.lua"))()
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/verified/9f7e5fdc25e7985e64f3894aa115a2ac.lua"))()
