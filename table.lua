@@ -48,7 +48,9 @@
    \|_________|                                                            
 
                                                                     
-discord.gg/sharpcc                                                                             
+discord.gg/sharpcc
+supercoolboi34 @canyoulovemeback
+Kai @wxrpedd
 --]]
 
 script_key="KEY HERE"; -- // Key
