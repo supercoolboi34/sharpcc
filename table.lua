@@ -84,7 +84,7 @@ getgenv().Sharp = {
 
         Visualizing = {
             SendNotification = Off,
-            Box = {Visible = Off, Size = V3(1, 5, 1), Color = C3(0, 0, 255)}, -- [Integers, Color code]
+            Box = {Visible = Off, Size = V3(2, 5, 1), Color = C3(0, 0, 255)}, -- [Integers, Color code]
         },
 
         Prediction = {
