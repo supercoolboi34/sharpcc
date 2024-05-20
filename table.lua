@@ -80,7 +80,7 @@ getgenv().Sharp = {
         Enabled = On,
         Keybind = "C",
         KeybindMode = "Toggle", -- [Hold or Toggle]
-        Delay = 0.01, -- Shoot Delay
+        Delay = 0.001, -- Shoot Delay
 
         Visualizing = {
             SendNotification = Off,
