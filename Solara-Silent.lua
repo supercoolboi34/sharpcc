@@ -218,8 +218,8 @@ end
 -- // Toggle Function // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
 local function toggleFeature()
     getgenv().SharpSSilent.Enabled = not getgenv().SharpSSilent.Enabled
-    local status = getgenv().SharpSSilent.Enabled and "Enabled" or "Disabled"
-    sendNotification("Sharp [S] Silent", "SSS " .. status, "rbxassetid://17561420493")
+    local status = getgenv().SharpSSilent.Enabled and "Sharp Enabled" or "Sharp Disabled"
+    sendNotification("Sharp [S] Silent", "" .. status, "rbxassetid://17561420493")
     if not getgenv().SharpSSilent.Enabled then
         Fov.Visible = false
     end
@@ -282,7 +282,7 @@ for _, tool in pairs(Local_Player.Character:GetChildren()) do
 end
 
 -- // Notification // Monkey Moment @wxrpedd & @canyoulovemeback on Discord
-sendNotification("Sharp.cc S-Silent", "Loaded", "rbxassetid://17561420493") -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+sendNotification("discord.gg/sharpcc", "#1 Triggerbot", "rbxassetid://17561420493") -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
 
 --[[ 
 
