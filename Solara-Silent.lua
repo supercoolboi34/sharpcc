@@ -66,7 +66,6 @@ getgenv().SharpSSilent = { -- Has Anti Aimviewer
     Keybind = "C",
     Resolver = false, -- Dookie Resolver
     WallCheck = true, -- if true takes 10000 fps if false + 100000 fps (joke ur getting trolled)
-    Grabbed = true, -- blalblabla ik ik
  -- a Knock Check is already Inside so no need for toggle
 }
 
@@ -124,13 +123,9 @@ local function Death(Plr)
     return Dead
 end
 
--- // Grabbed // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Grabbed // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord (this is js here for no reason idk use it however you want)
 local Grabbed = function(Plr)
-    if getgenv().SharpSSilent.Grabbed then
-        return Plr.Character and Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
-    else
-        return false
-    end
+    return Plr.Character and Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
 end
 
 -- // Define isPartVisible function // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
