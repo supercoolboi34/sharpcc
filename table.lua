@@ -55,8 +55,6 @@ Kai @wxrpedd
 
 script_key="KEY HERE"; -- // Key
 
-getgenv().script_key = script_key;
-
 -- # DO NOT TOUCH FOR COLORING & On/Off
 local On  = true;
 local Off = false;
