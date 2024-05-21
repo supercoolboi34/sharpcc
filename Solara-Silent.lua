@@ -65,7 +65,7 @@ getgenv().SharpSSilent = { -- Has Anti Aimviewer
     FovVisible = true,
     Keybind = "C",
     Resolver = false, -- Dookie Resolver
-    WallCheck = true, -- if true takes 10000 fps if false + 100000 fps
+    WallCheck = true, -- if true takes 10000 fps if false + 100000 fps (joke ur getting trolled)
     Grabbed = true, -- blalblabla ik ik
  -- a Knock Check is already Inside so no need for toggle
 }
