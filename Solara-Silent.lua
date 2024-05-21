@@ -59,7 +59,8 @@ getgenv().SharpSSilent = {
     FovVisible = true,
     Keybind = "C",
     Resolver = false, -- Dookie Resolver
-    WallCheck = true,
+    WallCheck = true, -- if true takes 10000 fps if false + 100000 fps
+ -- a Knock Check is already Inside so no need for toggle
 }
 
 -- // Services // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
