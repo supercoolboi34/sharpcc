@@ -78,6 +78,11 @@ local Target = nil
 local V2 = Vector2.new
 local Fov = Drawing.new("Circle")
 
+-- // Game Load Gay :( // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
 -- // Fov Update Base // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
 local function updateFov()
     Fov.Visible = getgenv().SharpSSilent.FovVisible
