@@ -282,7 +282,9 @@ for _, tool in pairs(Local_Player.Character:GetChildren()) do
 end
 
 -- // Notification // Monkey Moment @wxrpedd & @canyoulovemeback on Discord
-sendNotification("discord.gg/sharpcc", "#1 Triggerbot", "rbxassetid://17561420493") -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+sendNotification("dc.gg/sharpcc", "♣️ #1 Triggerbot", "rbxassetid://17561420493") -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+wait(3)
+sendNotification("dc.gg/sharpcc", "♣️ Supports Solara", "rbxassetid://17561420493") -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
 
 --[[ 
 
