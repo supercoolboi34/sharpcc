@@ -52,7 +52,13 @@ supercoolboi34 @canyoulovemeback
 Kai @wxrpedd
 --]]
 
-getgenv().SharpSSilent = {
+-- AUTOMATIC WEAPONS DOESNT WORK
+-- AUTOMATIC WEAPONS DOESNT WORK
+-- AUTOMATIC WEAPONS DOESNT WORK
+-- AUTOMATIC WEAPONS DOESNT WORK
+-- AUTOMATIC WEAPONS DOESNT WORK
+
+getgenv().SharpSSilent = { -- Has Anti Aimviewer
     Enabled = true,
     Prediction = 0.1215,
     FovRadius = 90,
