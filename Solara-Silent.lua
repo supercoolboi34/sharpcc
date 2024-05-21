@@ -291,8 +291,6 @@ sendNotification("dc.gg/sharpcc", "♣️ Supports Solara", "rbxassetid://175614
 Go get to Skidding !! Source Made By @wxrpedd & @canyoulovemeback on Discord,
 Everything is from scrap took us like 10 mins to make this so have fun.
 
-
-
 --]]
 --[[
 ⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠤⠤⠠⡖⠲⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠐⠀⠀⠀
