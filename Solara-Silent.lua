@@ -77,7 +77,7 @@ getgenv().SharpSSilent = {
         FovShape = "Circle"  -- ["Circle", "Square", "Triangle"]
     },
     HitPoint = {
-        ShowHitPoint = true,
+        ShowHitPoint = false,
         HitPointRadius = 8,
         HitPointThickness = 2,
         HitPointColor = Color3.fromRGB(255, 0, 0),
