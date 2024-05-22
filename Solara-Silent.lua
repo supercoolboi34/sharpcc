@@ -64,16 +64,16 @@ getgenv().SharpSSilent = {
     Enabled = true,
     Prediction = 0.1215,
     Keybind = "C",
-    Resolver = false, -- Bad Resolver
+    Resolver = false,
     WallCheck = true,
     FovSettings = {
         FovVisible = true,
-        FovRadius = 90,
+        FovRadius = 120,
         FovThickness = 2,
-        FovTransparency = 1,
+        FovTransparency = 0.7,
         FovColor = Color3.fromRGB(255, 255, 255),
         Filled = false,
-        FillTransparency = 0.5,
+        FillTransparency = 0.9,
         FovShape = "Circle"  -- ["Circle", "Square", "Triangle"]
     },
     HitPoint = {
@@ -85,7 +85,7 @@ getgenv().SharpSSilent = {
     }
 }
 
--- // Services // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Services // --
 local G = game
 local Run_Service = G:GetService("RunService")
 local Players = G:GetService("Players")
@@ -97,45 +97,82 @@ local Replicated_Storage = G:GetService("ReplicatedStorage")
 local StarterGui = G:GetService("StarterGui")
 local Workspace = G:GetService("Workspace")
 
--- // Variables // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Variables // --
 local Target = nil
 local V2 = Vector2.new
 local Fov = Drawing.new("Circle")
 local holdingMouseButton = false
 local lastToolUse = 0
 local HitPoint = Drawing.new("Circle")
+local FovParts = {}  -- Store the parts for square and triangle FOV
 
--- // Game Load Check // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Game Load Check // --
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
--- // Fov Update Function // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Clear FOV Parts // --
+local function clearFovParts()
+    for _, part in pairs(FovParts) do
+        part:Remove()
+    end
+    FovParts = {}
+end
+
+-- // Update FOV Function // --
 local function updateFov()
     local settings = getgenv().SharpSSilent.FovSettings
-    Fov.Visible = settings.FovVisible
-    Fov.Radius = settings.FovRadius
-    Fov.Position = V2(Mouse.X, Mouse.Y + (G:GetService("GuiService"):GetGuiInset().Y))
-    Fov.Color = settings.FovColor
-    Fov.Thickness = settings.FovThickness
-    Fov.Transparency = settings.FovTransparency
-    Fov.Filled = settings.Filled
+    clearFovParts()
 
-    if settings.Filled then
-        Fov.Transparency = settings.FillTransparency
-    end
-
-    -- Update Fov shape Monkey Moment @wxrpedd & @canyoulovemeback on Discord
     if settings.FovShape == "Square" then
-        Fov.Shape = "Square"
+        local halfSize = settings.FovRadius / 2
+        local corners = {
+            V2(Mouse.X - halfSize, Mouse.Y - halfSize),
+            V2(Mouse.X + halfSize, Mouse.Y - halfSize),
+            V2(Mouse.X + halfSize, Mouse.Y + halfSize),
+            V2(Mouse.X - halfSize, Mouse.Y + halfSize)
+        }
+        for i = 1, 4 do
+            local line = Drawing.new("Line")
+            line.Visible = settings.FovVisible
+            line.From = corners[i]
+            line.To = corners[i % 4 + 1]
+            line.Color = settings.FovColor
+            line.Thickness = settings.FovThickness
+            line.Transparency = settings.FovTransparency
+            table.insert(FovParts, line)
+        end
     elseif settings.FovShape == "Triangle" then
-        Fov.Shape = "Triangle"
-    else
-        Fov.Shape = "Circle"
+        local points = {
+            V2(Mouse.X, Mouse.Y - settings.FovRadius),
+            V2(Mouse.X + settings.FovRadius * math.sin(math.rad(60)), Mouse.Y + settings.FovRadius * math.cos(math.rad(60))),
+            V2(Mouse.X - settings.FovRadius * math.sin(math.rad(60)), Mouse.Y + settings.FovRadius * math.cos(math.rad(60)))
+        }
+        for i = 1, 3 do
+            local line = Drawing.new("Line")
+            line.Visible = settings.FovVisible
+            line.From = points[i]
+            line.To = points[i % 3 + 1]
+            line.Color = settings.FovColor
+            line.Thickness = settings.FovThickness
+            line.Transparency = settings.FovTransparency
+            table.insert(FovParts, line)
+        end
+    else  -- Default to Circle
+        Fov.Visible = settings.FovVisible
+        Fov.Radius = settings.FovRadius
+        Fov.Position = V2(Mouse.X, Mouse.Y + (G:GetService("GuiService"):GetGuiInset().Y))
+        Fov.Color = settings.FovColor
+        Fov.Thickness = settings.FovThickness
+        Fov.Transparency = settings.FovTransparency
+        Fov.Filled = settings.Filled
+        if settings.Filled then
+            Fov.Transparency = settings.FillTransparency
+        end
     end
 end
 
--- // Notification Function // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Notification Function // --
 local function sendNotification(title, text, icon)
     StarterGui:SetCore("SendNotification", {
         Title = title,
@@ -145,7 +182,7 @@ local function sendNotification(title, text, icon)
     })
 end
 
--- // Knock Check // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Knock Check // --
 local function Death(Plr)
     if Plr.Character and Plr.Character:FindFirstChild("BodyEffects") then
         local bodyEffects = Plr.Character.BodyEffects
@@ -155,19 +192,19 @@ local function Death(Plr)
     return false
 end
 
--- // Grab Check // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Grab Check // --
 local function Grabbed(Plr)
     return Plr.Character and Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
 end
 
--- // Check if Part in Fov and Visible // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Check if Part in Fov and Visible // --
 local function isPartInFovAndVisible(part)
     local screenPoint, onScreen = Current_Camera:WorldToScreenPoint(part.Position)
     local distance = (V2(screenPoint.X, screenPoint.Y) - V2(Mouse.X, Mouse.Y)).Magnitude
     return onScreen and distance <= getgenv().SharpSSilent.FovSettings.FovRadius
 end
 
--- // Check if Part Visible // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Check if Part Visible // --
 local function isPartVisible(part)
     if not getgenv().SharpSSilent.WallCheck then 
         return true
@@ -179,7 +216,7 @@ local function isPartVisible(part)
     return hit == part or not hit
 end
 
--- // Get Closest Hit Point on Part // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Get Closest Hit Point on Part // --
 local function GetClosestHitPoint(character)
     local closestPart = nil
     local closestPoint = nil
@@ -201,7 +238,7 @@ local function GetClosestHitPoint(character)
     return closestPart, closestPoint
 end
 
--- // Get Velocity Function // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Get Velocity Function // --
 local OldPredictionY = getgenv().SharpSSilent.Prediction
 local function GetVelocity(player, part)
     if player and player.Character then
@@ -219,13 +256,13 @@ local function GetVelocity(player, part)
     return Vector3.new(0, 0, 0)
 end
 
--- // Get Closest Player // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Get Closest Player // --
 local function GetClosestPlr()
     local closestTarget = nil
     local maxDistance = math.huge
 
     for _, player in pairs(Players:GetPlayers()) do
-        if player.Character and player ~= Local_Player and not Death(player) then  -- KO check using Death function Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+        if player.Character and player ~= Local_Player and not Death(player) then  -- KO check using Death function
             local closestPart, closestPoint = GetClosestHitPoint(player.Character)
             if closestPart and closestPoint then
                 local screenPoint = Current_Camera:WorldToScreenPoint(closestPoint)
@@ -241,7 +278,7 @@ local function GetClosestPlr()
     return closestTarget
 end
 
--- // Toggle Feature // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Toggle Feature // --
 local function toggleFeature()
     getgenv().SharpSSilent.Enabled = not getgenv().SharpSSilent.Enabled
     local status = getgenv().SharpSSilent.Enabled and "Sharp Enabled" or "Sharp Disabled"
@@ -249,15 +286,16 @@ local function toggleFeature()
     if not getgenv().SharpSSilent.Enabled then
         Fov.Visible = false
         HitPoint.Visible = false
+        clearFovParts()
     end
 end
 
--- // Convert Keybind to KeyCode // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Convert Keybind to KeyCode // --
 local function getKeyCodeFromString(key)
     return Enum.KeyCode[key]
 end
 
--- // Keybind Listener // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Keybind Listener // --
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed and input.KeyCode == getKeyCodeFromString(getgenv().SharpSSilent.Keybind) then
         toggleFeature()
@@ -272,7 +310,7 @@ UserInputService.InputEnded:Connect(function(input, gameProcessed)
     end
 end)
 
--- // Main Loop // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Main Loop // --
 Run_Service.RenderStepped:Connect(function()
     if getgenv().SharpSSilent.Enabled then
         Target = GetClosestPlr()
@@ -305,11 +343,11 @@ Run_Service.RenderStepped:Connect(function()
     end
 end)
 
--- // Hook Tool Activation // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Hook Tool Activation // --
 local function HookTool(tool)
     if tool:IsA("Tool") then
         tool.Activated:Connect(function()
-            if Target and Target.Character and tick() - lastToolUse > 0.1 then  -- Debounce for 0.1 seconds Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+            if Target and Target.Character and tick() - lastToolUse > 0.1 then  -- Debounce for 0.1 seconds
                 lastToolUse = tick()
                 local closestPart, closestPoint = GetClosestHitPoint(Target.Character)
                 if closestPart and closestPoint then
@@ -333,11 +371,10 @@ if Local_Player.Character then
     onCharacterAdded(Local_Player.Character)
 end
 
--- // Initial Notification // -- Monkey Moment @wxrpedd & @canyoulovemeback on Discord
+-- // Initial Notification // --
 sendNotification("dc.gg/sharpcc", "♣️ #1 Triggerbot", "rbxassetid://17561420493")
 wait(3)
 sendNotification("dc.gg/sharpcc", "♣️ Supports Solara", "rbxassetid://17561420493")
-
 --[[ 
 
 Go get to Skidding !! Source Made By @wxrpedd & @canyoulovemeback on Discord,
