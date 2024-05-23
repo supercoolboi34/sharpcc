@@ -69,7 +69,7 @@ getgenv().SharpSSilent = {
         FovColor = Color3.fromRGB(255, 255, 255),
         Filled = false,
         FillTransparency = 0.9,
-        FovShape = "Circle"  -- ["Circle", "Square", "Triangle"]
+        FovShape = "Circle"  -- ["Circle", "Square", "Triangle"] -- Doesnt Work ATM ig
     },
     HitPoint = {
         ShowHitPoint = false,
