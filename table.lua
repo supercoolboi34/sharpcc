@@ -63,8 +63,6 @@ local V3  = Vector3.new;
 local C3  = Color3.fromRGB;
 -- # DO NOT TOUCH FOR COLORING & On/Off
 
--- # Explaining: .0 are decimal On = true, false = Off keep it that way!
-
 getgenv().Sharp = {
     Threading = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
     Global = {
@@ -73,6 +71,7 @@ getgenv().Sharp = {
         Grabbed = On,
         Reloading = On,
         Resolver = On,
+        Forcefield = On,
     },
     Main = {
         Enabled = On,
@@ -87,16 +86,20 @@ getgenv().Sharp = {
 
         Prediction = {
             Horizontal = 0.12,
-            Vertical = 0.089,
+            Vertical = 0.1089,
         },
     },
     Color = {
         Enabled = Off,
-        Brightness = .1,
-        Contrast = .06,
-        Saturation = .9,
+        Brightness = 0.1,
+        Contrast = 0.06,
+        Saturation = 0.9,
+  
+    },
+     Whitelists = {
+        RobloxIDs = {123456, 123456}, -- [Add Roblox user IDs here]
+        FriendCheck = Off,
     },
 }
-
 
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/verified/9f7e5fdc25e7985e64f3894aa115a2ac.lua"))()
