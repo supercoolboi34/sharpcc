@@ -53,8 +53,6 @@ supercoolboi34 @canyoulovemeback
 Kai @wxrpedd
 --]]
 
-script_key="KEY HERE"; -- // Key
-
 -- # DO NOT TOUCH FOR COLORING & On/Off
 local On  = true;
 local Off = false;
@@ -64,6 +62,7 @@ local C3  = Color3.fromRGB;
 -- # DO NOT TOUCH FOR COLORING & On/Off
 
 getgenv().Sharp = {
+    Key = "KEY HERE" -- PASTE YOUR KEY HERE
     Threading = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
     Global = {
         Death = {Self = On, Target = On},
@@ -102,4 +101,4 @@ getgenv().Sharp = {
     },
 }
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/verified/9f7e5fdc25e7985e64f3894aa115a2ac.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/loader"))()
