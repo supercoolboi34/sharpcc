@@ -1,1 +1,4 @@
 
+
+
+script_key = getgenv().Sharp.Key;
