@@ -329,7 +329,7 @@ Run_Service.RenderStepped:Connect(function()
 
                 if holdingMouseButton then
                     local velocity = GetVelocity(Target, closestPart.Name)
-                    Replicated_Storage.MainEvent:FireServer("UpdateMousePos", closestPoint + velocity * getgenv().SharpSSilent.Prediction)
+                    Replicated_Storage.MainEvent:FireServer("UpdateMousePos1", closestPoint + velocity * getgenv().SharpSSilent.Prediction)
                 end
             end
         else
@@ -347,7 +347,7 @@ local function HookTool(tool)
                 local closestPart, closestPoint = GetClosestHitPoint(Target.Character)
                 if closestPart and closestPoint then
                     local velocity = GetVelocity(Target, closestPart.Name)
-                    Replicated_Storage.MainEvent:FireServer("UpdateMousePos", closestPoint + velocity * getgenv().SharpSSilent.Prediction)
+                    Replicated_Storage.MainEvent:FireServer("UpdateMousePos1", closestPoint + velocity * getgenv().SharpSSilent.Prediction)
                 end
             end
         end)
