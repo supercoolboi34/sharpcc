@@ -52,8 +52,10 @@ supercoolboi34 @canyoulovemeback
 Kai @wxrpedd
 --]]
 
--- AUTOMATIC WEAPONS DOESNT WORK
--- Built In Anti Aimviewer :D
+-- Changelog: Fixed for newest da hood update
+
+-- Built in Anti Aimviewer.
+-- Automatics doesnt work cus of function.
 
 getgenv().SharpSSilent = {
     Enabled = true,
