@@ -61,7 +61,7 @@ local C3  = Color3.fromRGB;
 -- # DO NOT TOUCH FOR COLORING & On/Off
 
 getgenv().Sharp = {
-    Key = "KEY HERE" -- [PASTE YOUR LUARMOR KEY HERE]
+    Key = "KEY HERE", -- [PASTE YOUR LUARMOR KEY HERE]
     Threading = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
     Global = {
         Death = {Self = On, Target = On},
