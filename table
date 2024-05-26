@@ -74,19 +74,19 @@ getgenv().Sharp = {
     Main = {
         Enabled = On,
         Keybind = "C",
-        KeybindMode = "Toggle",
-        Delay = 0.02,
+        KeybindMode = "Toggle", -- [Hold or Toggle]
+        Delay = 0.02, -- [Shoot Delay]
         NotifyOnExecute = On,
 
         Visualizing = {
             SendNotification = Off,
-            Box = {Visible = On, Size = V3(1.7, 4.6, 1.4), Color = C3(3, 100, 255)}, -- [Integers, Color code]
+            Box = {Visible = Off, Size = V3(1.7, 4.6, 1.4), Color = C3(3, 100, 255)}, -- [Integers, Color code]
         },
 
-        Prediction = {
-            Horizontal = 0.21304,
+        Prediction = { -- [Default Low Ping Sets]
+            Horizontal = 0.21304, 
             Vertical = 0.10943,
-            AutoPrediction = Off,
+            AutoPrediction = Off, -- [if you want try it out recommendet a custom one.]
         },
     },
     Color = {
