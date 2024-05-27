@@ -52,6 +52,8 @@ supercoolboi34 @canyoulovemeback
 Kai @wxrpedd
 --]]
 
+
+
 -- # DO NOT TOUCH FOR COLORING & On/Off
 local On  = true;
 local Off = false;
@@ -60,44 +62,50 @@ local V3  = Vector3.new;
 local C3  = Color3.fromRGB;
 -- # DO NOT TOUCH FOR COLORING & On/Off
 
+
+
+
+
+
 getgenv().Sharp = {
-    Key = "KEY HERE", -- [PASTE YOUR LUARMOR KEY HERE]
-    Threading = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
-    Global = {
-        Death = {Self = On, Target = On},
-        Team = Off, -- Universal
-        Grabbed = On,
-        Reloading = On,
-        Resolver = On,
-        Forcefield = On,
+    ['Key'] = "KEY HERE", -- [REPLACE YOUR LUARMOR KEY WITH "KEY HERE"]
+    
+    ['Threading'] = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
+    ['Global'] = {
+        ['Death'] = {Self = On, Target = On},
+        ['Team'] = Off, -- Universal
+        ['Grabbed'] = On,
+        ['Reloading'] = On,
+        ['Resolver'] = On,
+        ['Forcefield'] = On,
     },
-    Main = {
-        Enabled = On,
-        Keybind = "C",
-        KeybindMode = "Toggle", -- [Hold or Toggle]
-        Delay = 0.02, -- [Shoot Delay]
-        NotifyOnExecute = On,
+    ['Main'] = {
+        ['Enabled'] = On,
+        ['Keybind'] = "C",
+        ['KeybindMode'] = "Toggle", -- [Hold or Toggle]
+        ['Delay'] = 0.02, -- [Shoot Delay]
+        ['NotifyOnExecute'] = On,
 
-        Visualizing = {
-            SendNotification = Off,
-            Box = {Visible = Off, Size = V3(1.7, 4.6, 1.4), Color = C3(3, 100, 255)}, -- [Integers, Color code]
+        ['Visualizing'] = {
+            ['SendNotification'] = Off,
+            ['Box'] = {Visible = Off, Size = V3(1.7, 4.6, 1.4), Color = C3(3, 100, 255)}, -- [Integers, Color code]
         },
 
-        Prediction = { -- [Default Low Ping Sets]
-            Horizontal = 0.21304, 
-            Vertical = 0.10943,
-            AutoPrediction = Off, -- [if you want try it out recommendet a custom one.]
+        ['Prediction'] = { -- [Default Low Ping Sets]
+            ['Horizontal'] = 0.21304, 
+            ['Vertical'] = 0.10943,
+            ['AutoPrediction'] = Off, -- [if you want try it out recommendet a custom one.]
         },
     },
-    Color = {
-        Enabled = Off,
-        Brightness = .1,
-        Contrast = .06,
-        Saturation = .9,
+    ['Color'] = {
+        ['Enabled'] = Off,
+        ['Brightness'] = .1,
+        ['Contrast'] = .06,
+        ['Saturation'] = .9,
     },
-    Whitelists = {
-        RobloxIDs = {123456, 123456}, -- Add Roblox user IDs here
-        FriendCheck = Off,
+    ['Whitelists'] = {
+        ['RobloxIDs'] = {123456, 123456}, -- Add Roblox user IDs here
+        ['FriendCheck'] = Off,
     },
 }
 
