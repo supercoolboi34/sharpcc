@@ -56,6 +56,7 @@ Kai @wxrpedd
 
 -- Built in Anti Aimviewer.
 -- Automatics doesnt work cus of function.
+-- Auto Detects Da Hood Updates.
 
 getgenv().SharpSSilent = {
     Enabled = true,
