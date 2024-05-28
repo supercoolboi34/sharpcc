@@ -50,7 +50,7 @@ getgenv().Sharp = {
 
         ['Visualizing'] = {
             ['SendNotification'] = Off,
-            ['Box'] = {Visible = Off, Size = V3(1.7, 4.6, 1.4), Color = C3(3, 100, 255)}, -- [Integers, Color code]
+            ['Box'] = {Visible = Off, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)}, -- [Integers, Color code]
         },
 
         ['Prediction'] = { -- [Default Low Ping Sets]
