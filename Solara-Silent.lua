@@ -1,49 +1,8 @@
---[[
- ________  ___  ___  ________  ________  ________   ________  ________     
-|\   ____\|\  \|\  \|\   __  \|\   __  \|\   __  \ |\   ____\|\   ____\    
-\ \  \___|\ \  \\\  \ \  \|\  \ \  \|\  \ \  \|\  \\ \  \___|\ \  \___|    
- \ \_____  \ \   __  \ \   __  \ \   _  _\ \   ____\\ \  \    \ \  \       
-  \|____|\  \ \  \ \  \ \  \ \  \ \  \\  \\ \  \___|_\ \  \____\ \  \____  
-    ____\_\  \ \__\ \__\ \__\ \__\ \__\\ _\\ \__\ |\__\ \_______\ \_______\
-   |\_________\|__|\|__|\|__|\|__|\|__|\|__|\|__| \|__|\|_______|\|_______|
-   \|_________|                                                            
 
-                                                                    
-discord.gg/sharpcc
-supercoolboi34 @canyoulovemeback
-Kai @wxrpedd
---]]
 
 -- Changelog: Fixed for newest da hood update
-
 -- Built in Anti Aimviewer.
 -- Automatics doesnt work cus of function.
--- Auto Detects Da Hood Updates.
-
-getgenv().SharpSSilent = {
-    Enabled = true,
-    Prediction = 0.1215,
-    Keybind = "C",
-    Resolver = false,
-    WallCheck = true,
-    FovSettings = {
-        FovVisible = true,
-        FovRadius = 120,
-        FovThickness = 2,
-        FovTransparency = 0.7,
-        FovColor = Color3.fromRGB(255, 255, 255),
-        Filled = false,
-        FillTransparency = 0.9,
-        FovShape = "Circle"  -- ["Circle", "Square", "Triangle"] -- Doesnt Work ATM ig
-    },
-    HitPoint = {
-        ShowHitPoint = false,
-        HitPointRadius = 8,
-        HitPointThickness = 2,
-        HitPointColor = Color3.fromRGB(255, 0, 0),
-        HitPointTransparency = 1,
-    }
-}
 
 -- // Services // --
 local G                   = game
