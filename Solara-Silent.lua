@@ -89,11 +89,12 @@ local Players             = G:GetService("Players")
 local UserInputService    = G:GetService("UserInputService")
 local Local_Player        = Players.LocalPlayer
 local Mouse               = Local_Player:GetMouse()
+local MainEvent           = ReplicatedStorage:FindFirstChild("MainEvent")
 local Current_Camera      = G:GetService("Workspace").CurrentCamera
 local Replicated_Storage  = G:GetService("ReplicatedStorage")
 local StarterGui          = G:GetService("StarterGui")
 local Workspace           = G:GetService("Workspace")
-local MainEvent           = G:GetService("MainEvent")
+
 
 -- // Variables // --
 local Target = nil
