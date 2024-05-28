@@ -54,8 +54,8 @@ getgenv().Sharp = {
         },
 
         ['Prediction'] = { -- [Default Low Ping Sets]
-            ['Horizontal'] = 0.12604, 
-            ['Vertical'] = 0.10943,
+            ['Horizontal'] = 0.12000, 
+            ['Vertical'] = 0.10800,
             ['AutoPrediction'] = Off, -- [if you want try it out recommendet a custom one.]
         },
     },
