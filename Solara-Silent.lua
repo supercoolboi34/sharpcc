@@ -1,5 +1,3 @@
-
-
 -- Changelog: Fixed for newest da hood update
 -- Built in Anti Aimviewer.
 -- Automatics doesnt work cus of function.
