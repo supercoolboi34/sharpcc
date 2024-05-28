@@ -109,31 +109,6 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
--- // Update Detection // -- if your using it please credit "supercoolboi34"
-local ReplicatedStorage   = game:GetService("ReplicatedStorage")
-local MainEvent           = ReplicatedStorage:FindFirstChild("MainEvent")
-
-if not MainEvent then
-    Players.LocalPlayer:Kick("Are you sure this is Da Hood? /sharpcc")
-    return
-end
-
-local function isArgumentValid(argumentName)
-    local validArguments = {
-        "UpdateMousePosI",
-    }
-
-    return table.find(validArguments, argumentName) ~= nil
-end
-
-local argumentToCheck = "UpdateMousePosI"
-
-if isArgumentValid(argumentToCheck) then
-    MainEvent:FireServer(argumentToCheck) 
-else
-    Players.LocalPlayer:Kick("Da Hood Updated Argument /sharpcc")
-end
-
 
 -- // Clear FOV Parts // --
 local function clearFovParts()
