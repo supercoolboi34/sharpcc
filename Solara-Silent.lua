@@ -83,16 +83,17 @@ getgenv().SharpSSilent = {
 }
 
 -- // Services // --
-local G = game
-local Run_Service = G:GetService("RunService")
-local Players = G:GetService("Players")
-local UserInputService = G:GetService("UserInputService")
-local Local_Player = Players.LocalPlayer
-local Mouse = Local_Player:GetMouse()
-local Current_Camera = G:GetService("Workspace").CurrentCamera
-local Replicated_Storage = G:GetService("ReplicatedStorage")
-local StarterGui = G:GetService("StarterGui")
-local Workspace = G:GetService("Workspace")
+local G                   = game
+local Run_Service         = G:GetService("RunService")
+local Players             = G:GetService("Players")
+local UserInputService    = G:GetService("UserInputService")
+local Local_Player        = Players.LocalPlayer
+local Mouse               = Local_Player:GetMouse()
+local Current_Camera      = G:GetService("Workspace").CurrentCamera
+local Replicated_Storage  = G:GetService("ReplicatedStorage")
+local StarterGui          = G:GetService("StarterGui")
+local Workspace           = G:GetService("Workspace")
+local MainEvent           = G:GetService("MainEvent")
 
 -- // Variables // --
 local Target = nil
@@ -106,6 +107,29 @@ local FovParts = {}  -- Store the parts for square and triangle FOV
 -- // Game Load Check // --
 if not game:IsLoaded() then
     game.Loaded:Wait()
+end
+
+-- // Update Detection // --
+if not MainEvent then
+    Players.LocalPlayer:Kick("Are you sure this is da hood? /sharpcc")
+    return
+end
+
+local function isArgumentValid(argumentName)
+    local validArguments = {
+        "UpdateMousePosI",
+    }
+
+    return table.find(validArguments, argumentName) ~= nil
+end
+
+local argumentToCheck = "UpdateMousePosI"
+
+if isArgumentValid(argumentToCheck) then
+    print("Argument Valid, Da Hood Devs are lazy.")
+    MainEvent:FireServer(argumentToCheck)
+else
+    Players.LocalPlayer:Kick("Da Hood Updated Argument /sharpcc")
 end
 
 -- // Clear FOV Parts // --
