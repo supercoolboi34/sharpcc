@@ -108,7 +108,7 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
--- // Update Detection // -- if your sing it please credit "supercoolboi34"
+-- // Update Detection // -- if your using it please credit "supercoolboi34"
 local ReplicatedStorage   = game:GetService("ReplicatedStorage")
 local MainEvent           = ReplicatedStorage:FindFirstChild("MainEvent")
 
