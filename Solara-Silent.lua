@@ -113,7 +113,7 @@ local ReplicatedStorage   = game:GetService("ReplicatedStorage")
 local MainEvent           = ReplicatedStorage:FindFirstChild("MainEvent")
 
 if not MainEvent then
-    Players.LocalPlayer:Kick("Are you sure this is da hood? /sharpcc")
+    Players.LocalPlayer:Kick("Are you sure this is Da Hood? /sharpcc")
     return
 end
 
