@@ -33,8 +33,8 @@ getgenv().Sharp = {
         ['Checks'] = {
             ['Grabbed'] = On,
             ['Reloading'] = On,
-            ['GunCheck'] = On, -- [Knife, Katana, etc.]
-            ['FoodCheck'] = On, -- [Chicken, Pizza, etc.]
+            ['GunCheck'] = Off, -- [Knife, Katana, etc.]
+            ['FoodCheck'] = Off, -- [Chicken, Pizza, etc.]
         },
     },
     ['Forcefield'] = On, -- [Spawn Protection Check]
