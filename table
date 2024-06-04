@@ -25,50 +25,51 @@ local C3  = Color3.fromRGB;
 -- # DO NOT TOUCH FOR COLORING & On/Off
 
 
-
-
-
-
 getgenv().Sharp = {
-    ['Key'] = "KEY HERE", -- [REPLACE YOUR LUARMOR KEY WITH "KEY HERE"]
-    
-    ['Threading'] = "RenderStepped", -- [RenderStepped, Stepped, Heartbeat]
+    ['Key'] = "KEY HERE", -- [YOUR KEY GOES BETWEEN "" THOSE SYMBOLES REPLACE WITH KEY HERE]
     ['Global'] = {
         ['Death'] = {Self = On, Target = On},
-        ['Team'] = Off, -- Universal
-        ['Grabbed'] = On,
-        ['Reloading'] = On,
-        ['Resolver'] = On,
-        ['Forcefield'] = On,
+        ['Team'] = Off, 
+        ['Checks'] = {
+            ['Grabbed'] = On,
+            ['Reloading'] = On,
+            ['GunCheck'] = On, -- [Knife, Katana, etc.]
+            ['FoodCheck'] = On, -- [Chicken, Pizza, etc.]
+        },
     },
+    ['Forcefield'] = On, -- [Spawn Protection Check]
+    ['Resolver'] = Off,
+
     ['Main'] = {
         ['Enabled'] = On,
         ['Keybind'] = "C",
         ['KeybindMode'] = "Toggle", -- [Hold or Toggle]
-        ['Delay'] = 0.02, -- [Shoot Delay]
+        ['Delay'] = 0.01, -- [Shoot Delay]
         ['NotifyOnExecute'] = On,
 
-        ['Visualizing'] = {
-            ['SendNotification'] = Off,
-            ['Box'] = {Visible = Off, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)}, -- [Integers, Color code]
+     ['Visualizing'] = {
+            ['SendNotification'] = Off, -- [Enable / Disable Notification]
+            ['Box'] = {Visible = Off, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
         },
 
-        ['Prediction'] = { -- [Default Low Ping Sets]
+     ['Prediction'] = {
             ['Horizontal'] = 0.12000, 
             ['Vertical'] = 0.10800,
-            ['AutoPrediction'] = Off, -- [if you want try it out recommendet a custom one.]
+            ['AutoPrediction'] = Off, -- [BETA]
         },
     },
-    ['Color'] = {
+
+     ['Color'] = {
         ['Enabled'] = Off,
-        ['Brightness'] = .1,
-        ['Contrast'] = .06,
-        ['Saturation'] = .9,
+        ['Brightness'] = 0.1,
+        ['Contrast'] = 0.06,
+        ['Saturation'] = 0.9,
     },
-    ['Whitelists'] = {
-        ['RobloxIDs'] = {123456, 123456}, -- Add Roblox user IDs here
+
+     ['Whitelists'] = {
+        ['RobloxIDs'] = {123456, 123456}, -- [Add any Roblox User iD it doesnt shoot at them]
         ['FriendCheck'] = Off,
-    },
+    }
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/loader"))()
