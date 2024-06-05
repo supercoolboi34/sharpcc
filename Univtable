@@ -39,7 +39,7 @@ getgenv().Sharp = {
         ['Delay'] = 0.03, -- [Shoot Delay]
         ['NotifyOnExecute'] = true, -- [Notifies when executed]
         ['Visualizing'] = {
-            ['SendNotification'] = true,
+            ['SendNotification'] = false,
             ['Box'] = {Visible = false, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
         },
         ['Prediction'] = {
