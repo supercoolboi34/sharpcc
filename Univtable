@@ -1,0 +1,68 @@
+--[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+ ________  ___  ___  ________  ________  ________   ________  ________     
+|\   ____\|\  \|\  \|\   __  \|\   __  \|\   __  \ |\   ____\|\   ____\    
+\ \  \___|\ \  \\\  \ \  \|\  \ \  \|\  \ \  \|\  \\ \  \___|\ \  \___|    
+ \ \_____  \ \   __  \ \   __  \ \   _  _\ \   ____\\ \  \    \ \  \       
+  \|____|\  \ \  \ \  \ \  \ \  \ \  \\  \\ \  \___|_\ \  \____\ \  \____  
+    ____\_\  \ \__\ \__\ \__\ \__\ \__\\ _\\ \__\ |\__\ \_______\ \_______\
+   |\_________\|__|\|__|\|__|\|__|\|__|\|__|\|__| \|__|\|_______|\|_______|
+   \|_________|                                                            
+
+                                                                    
+discord.gg/sharpcc
+supercoolboi34 @canyoulovemeback
+Kai @wxrpedd
+--]]
+
+local V2 = Vector2.new
+local V3 = Vector3.new
+local C3 = Color3.fromRGB
+
+getgenv().Sharp = {
+    ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLES "" ]
+    ['Global'] = {
+        ['Death'] = {Self = true, Target = true},
+        ['Team'] = false, -- [ UNIVERSAL ]
+        ['Checks'] = {
+            ['Grabbed'] = true,
+            ['Reloading'] = true,
+            ['GunCheck'] = false, -- [ DOESNT STAB WITH KNIFE WHEN TOGGLE ENABLED ]
+            ['FoodCheck'] = true, -- [ DOESNT USES FOOD WHEN TOGGLE ENABLED ]
+        },
+        ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
+        ['Resolver'] = true,
+    },
+    ['Main'] = {
+        ['Enabled'] = true,
+        ['Keybind'] = "C",
+        ['KeybindMode'] = "Toggle", -- [Hold or Toggle
+        ['Delay'] = 0.03, -- [Shoot Delay]
+        ['NotifyOnExecute'] = true, -- [Notifies when executed]
+        ['Visualizing'] = {
+            ['SendNotification'] = true,
+            ['Box'] = {Visible = false, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
+        },
+        ['Prediction'] = {
+            ['Horizontal'] = 0.1200, 
+            ['Vertical'] = 0.10800,
+            ['AutoPrediction'] = false, -- [BETA]
+        },
+    },
+    ['Color'] = {
+        ['Enabled'] = false,
+        ['Brightness'] = 0.1,
+        ['Contrast'] = 0.06,
+        ['Saturation'] = 0.9,
+    },
+    ['Whitelists'] = {
+        ['RobloxIDs'] = {123456, 123456}, -- [Add Roblox Profile User iD's Here]
+        ['FriendCheck'] = false,
+    },
+    ['PanicMode'] = {
+        ['Enabled'] = false,
+        ['Keybind'] = "K", 
+        ['Mode'] = "Crash" -- [Kick or Crash] (Crash is more Legit, Kick says "Sharp Kicked You!")
+    }
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/univloader"))()
