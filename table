@@ -14,8 +14,6 @@ supercoolboi34 @canyoulovemeback
 Kai @wxrpedd
 --]]
 
-
-
 -- # DO NOT TOUCH FOR COLORING & On/Off
 local On  = true;
 local Off = false;
@@ -24,52 +22,44 @@ local V3  = Vector3.new;
 local C3  = Color3.fromRGB;
 -- # DO NOT TOUCH FOR COLORING & On/Off
 
-
 getgenv().Sharp = {
-    ['Key'] = "KEY HERE", -- [YOUR KEY GOES BETWEEN "" THOSE SYMBOLES REPLACE WITH KEY HERE]
+    ['Key'] = "", 
     ['Global'] = {
         ['Death'] = {Self = On, Target = On},
         ['Team'] = Off, 
         ['Checks'] = {
             ['Grabbed'] = On,
             ['Reloading'] = On,
-            ['GunCheck'] = Off, -- [Knife, Katana, etc.]
-            ['FoodCheck'] = Off, -- [Chicken, Pizza, etc.]
+            ['GunCheck'] = Off,
+            ['FoodCheck'] = On,
         },
+        ['Forcefield'] = On,
+        ['Resolver'] = Off,
     },
-    ['Forcefield'] = On, -- [Spawn Protection Check]
-    ['Resolver'] = Off,
-
     ['Main'] = {
         ['Enabled'] = On,
         ['Keybind'] = "C",
-        ['KeybindMode'] = "Toggle", -- [Hold or Toggle]
-        ['Delay'] = 0.01, -- [Shoot Delay]
+        ['KeybindMode'] = "Toggle",
+        ['Delay'] = 0.01,
         ['NotifyOnExecute'] = On,
-
-     ['Visualizing'] = {
-            ['SendNotification'] = Off, -- [Enable / Disable Notification]
+        ['Visualizing'] = {
+            ['SendNotification'] = Off,
             ['Box'] = {Visible = Off, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
         },
-
-     ['Prediction'] = {
-            ['Horizontal'] = 0.12000, 
-            ['Vertical'] = 0.10800,
-            ['AutoPrediction'] = Off, -- [BETA]
+        ['Prediction'] = {
+            ['Horizontal'] = 0.12261, 
+            ['Vertical'] = 0.10821,
+            ['AutoPrediction'] = Off,
         },
     },
-
-     ['Color'] = {
+    ['Color'] = {
         ['Enabled'] = Off,
         ['Brightness'] = 0.1,
         ['Contrast'] = 0.06,
         ['Saturation'] = 0.9,
     },
-
-     ['Whitelists'] = {
-        ['RobloxIDs'] = {123456, 123456}, -- [Add any Roblox User iD it doesnt shoot at them]
+    ['Whitelists'] = {
+        ['RobloxIDs'] = {123456, 123456}, 
         ['FriendCheck'] = Off,
     }
 }
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/loader"))()
