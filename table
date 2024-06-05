@@ -28,6 +28,7 @@ getgenv().Sharp = {
             ['Reloading'] = true,
             ['GunCheck'] = false, -- [ DOESNT STAB WITH KNIFE WHEN TOGGLE ENABLED ]
             ['FoodCheck'] = true, -- [ DOESNT USES FOOD WHEN TOGGLE ENABLED ]
+            ['CrewCheck'] = false,
         },
         ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
         ['Resolver'] = false,
