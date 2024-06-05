@@ -14,52 +14,55 @@ supercoolboi34 @canyoulovemeback
 Kai @wxrpedd
 --]]
 
--- # DO NOT TOUCH FOR COLORING & On/Off
-local On  = true;
-local Off = false;
-local V2  = Vector2.new;
-local V3  = Vector3.new;
-local C3  = Color3.fromRGB;
--- # DO NOT TOUCH FOR COLORING & On/Off
+local V2 = Vector2.new
+local V3 = Vector3.new
+local C3 = Color3.fromRGB
 
 getgenv().Sharp = {
-    ['Key'] = "", 
+    ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLES "" ]
     ['Global'] = {
-        ['Death'] = {Self = On, Target = On},
-        ['Team'] = Off, 
+        ['Death'] = {Self = true, Target = true},
+        ['Team'] = false, -- [ UNIVERSAL ]
         ['Checks'] = {
-            ['Grabbed'] = On,
-            ['Reloading'] = On,
-            ['GunCheck'] = Off,
-            ['FoodCheck'] = On,
+            ['Grabbed'] = true,
+            ['Reloading'] = true,
+            ['GunCheck'] = false, -- [ DOESNT STAB WITH KNIFE WHEN TOGGLE ENABLED ]
+            ['FoodCheck'] = true, -- [ DOESNT USES FOOD WHEN TOGGLE ENABLED ]
         },
-        ['Forcefield'] = On,
-        ['Resolver'] = Off,
+        ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
+        ['Resolver'] = false,
     },
     ['Main'] = {
-        ['Enabled'] = On,
+        ['Enabled'] = true,
         ['Keybind'] = "C",
-        ['KeybindMode'] = "Toggle",
-        ['Delay'] = 0.01,
-        ['NotifyOnExecute'] = On,
+        ['KeybindMode'] = "Toggle", -- [Hold or Toggle
+        ['Delay'] = 0.01, -- [Shoot Delay]
+        ['NotifyOnExecute'] = true, -- [Notifies when executed]
         ['Visualizing'] = {
-            ['SendNotification'] = Off,
-            ['Box'] = {Visible = Off, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
+            ['SendNotification'] = false,
+            ['Box'] = {Visible = false, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
         },
         ['Prediction'] = {
-            ['Horizontal'] = 0.12261, 
-            ['Vertical'] = 0.10821,
-            ['AutoPrediction'] = Off,
+            ['Horizontal'] = 0.12000, 
+            ['Vertical'] = 0.10800,
+            ['AutoPrediction'] = false, -- [BETA]
         },
     },
     ['Color'] = {
-        ['Enabled'] = Off,
+        ['Enabled'] = false,
         ['Brightness'] = 0.1,
         ['Contrast'] = 0.06,
         ['Saturation'] = 0.9,
     },
     ['Whitelists'] = {
-        ['RobloxIDs'] = {123456, 123456}, 
-        ['FriendCheck'] = Off,
+        ['RobloxIDs'] = {123456, 123456}, -- [Add Roblox Profile User iD's Here]
+        ['FriendCheck'] = false,
+    },
+    ['PanicMode'] = {
+        ['Enabled'] = true,
+        ['Keybind'] = "K", 
+        ['Mode'] = "Crash" -- [Kick or Crash] (Crash is more Legit, Kick says "Sharp Kicked You!")
     }
 }
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/loader"))()
