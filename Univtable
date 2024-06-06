@@ -23,12 +23,8 @@ getgenv().Sharp = {
     ['Global'] = {
         ['Death'] = {Self = true, Target = true},
         ['Team'] = false, -- [ UNIVERSAL ]
-        ['Checks'] = {
-            ['Grabbed'] = true,
-            ['Reloading'] = true,
-            ['GunCheck'] = false, -- [ DOESNT STAB WITH KNIFE WHEN TOGGLE ENABLED ]
-            ['FoodCheck'] = true, -- [ DOESNT USES FOOD WHEN TOGGLE ENABLED ]
-        },
+        ['Grabbed'] = true,
+        ['Reloading'] = true,
         ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
         ['Resolver'] = true,
     },
@@ -58,11 +54,6 @@ getgenv().Sharp = {
         ['RobloxIDs'] = {123456, 123456}, -- [Add Roblox Profile User iD's Here]
         ['FriendCheck'] = false,
     },
-    ['PanicMode'] = {
-        ['Enabled'] = false,
-        ['Keybind'] = "K", 
-        ['Mode'] = "Crash" -- [Kick or Crash] (Crash is more Legit, Kick says "Sharp Kicked You!")
-    }
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/univloader"))()
