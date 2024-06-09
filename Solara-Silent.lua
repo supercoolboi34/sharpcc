@@ -1,35 +1,71 @@
--- Changelog: Fixed for newest da hood update
--- Built in Anti Aimviewer.
--- Automatics doesnt work cus of function.
+-- [+] Fixed Script
+-- [+] Fixed FOV
+-- [+] Fixed Untargetting inside FOV (probably)
+-- [+] Enable / Disabled Notification Toggle
+-- [+] * Prediction
+-- [+] Horizontal
+ --[+] Vertical
+-- [+] Added Prediction Adjustment
+-- [+] * Targeting
+-- [+] TargetMode ["Closest" & "HitPart"]
+-- [+] UntargetOnFall
+-- [+] HitPart ["Head", "Torso", "HumanoidRootPart", "LeftArm", "RightArm", "LeftLeg", "RightLeg", "LowerRightLeg", "LowerLeftLeg"]
+-- [+] * Added Dynamic FOV
+-- [+] BasedOn ["Health" & "Speed"]
+-- [+] MinFovRadius
+-- [+] MaxFovRadius
+-- [+] SpeedThreshold
+-- [+] HealthThreshold
+-- [+] * Humanization
+-- [+] HumanizationFactor
+-- [+] TargetSwitchDuration
+-- [+] * Watermark
+-- [+] Enable / Disable
+-- [+] Sound
+-- [+] Music
+-- [+] Fixed ATON OF SHIT while making this
+--[[ Disclaimer: 
+if your getting banned using Sharp Solara Silent, while da hood updated and,
+its not my fault or anyones fault in my team your using Cheats at your OWN RISK,
+so be careful and check for Da Hood updates before using it.
+--]]
+--[[ Copying: 
+if your getting banned using Sharp Solara Silent, while da hood updated and,
+its not my fault or anyones fault in my team your using Cheats at your OWN RISK,
+so be careful and check for Da Hood updates before using it.
+--]]
 
--- // Services // --
-local G                   = game
-local Run_Service         = G:GetService("RunService")
-local Players             = G:GetService("Players")
-local UserInputService    = G:GetService("UserInputService")
-local Local_Player        = Players.LocalPlayer
-local Mouse               = Local_Player:GetMouse()
-local Current_Camera      = G:GetService("Workspace").CurrentCamera
-local Replicated_Storage  = G:GetService("ReplicatedStorage")
-local StarterGui          = G:GetService("StarterGui")
-local Workspace           = G:GetService("Workspace")
+-- // Services // -- @canyoulovemeback on discord / supercoolboi34
+local G = game
+local Run_Service = G:GetService("RunService")
+local Players = G:GetService("Players")
+local UserInputService = G:GetService("UserInputService")
+local Local_Player = Players.LocalPlayer
+local Mouse = Local_Player:GetMouse()
+local Current_Camera = G:GetService("Workspace").CurrentCamera
+local Replicated_Storage = G:GetService("ReplicatedStorage")
+local StarterGui = G:GetService("StarterGui")
+local Workspace = G:GetService("Workspace")
+local SoundService = G:GetService("SoundService")
 
--- // Variables // --
+-- // Variables // -- @canyoulovemeback on discord / supercoolboi34
 local Target = nil
 local V2 = Vector2.new
 local Fov = Drawing.new("Circle")
-local holdingMouseButton = false
 local lastToolUse = 0
 local HitPoint = Drawing.new("Circle")
 local FovParts = {}  -- Store the parts for square and triangle FOV
+local wallCheckFrequency = 10  -- Perform wall check every 10 frames
+local frameCounter = 0
+local lastSwitchTime = tick()
+local fallStartTime = {}
 
--- // Game Load Check // --
+-- // Game Load Check // -- @canyoulovemeback on discord / supercoolboi34
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
-
--- // Clear FOV Parts // --
+-- // Clear FOV Parts // -- @canyoulovemeback on discord / supercoolboi34
 local function clearFovParts()
     for _, part in pairs(FovParts) do
         part:Remove()
@@ -37,10 +73,20 @@ local function clearFovParts()
     FovParts = {}
 end
 
--- // Update FOV Function // --
+-- // Update FOV Function // -- @canyoulovemeback on discord / supercoolboi34
 local function updateFov()
     local settings = getgenv().SharpSSilent.FovSettings
     clearFovParts()
+    if settings.DynamicFOV.Enabled then
+        local dynamicSettings = settings.DynamicFOV
+        if dynamicSettings.Type == "Speed" and Local_Player.Character and Local_Player.Character:FindFirstChild("HumanoidRootPart") then
+            local speed = Local_Player.Character.HumanoidRootPart.Velocity.Magnitude
+            settings.FovRadius = math.clamp(dynamicSettings.MinFOV + (speed / dynamicSettings.SpeedThreshold) * (dynamicSettings.MaxFOV - dynamicSettings.MinFOV), dynamicSettings.MinFOV, dynamicSettings.MaxFOV)
+        elseif dynamicSettings.Type == "Health" and Local_Player.Character and Local_Player.Character:FindFirstChild("Humanoid") then
+            local healthPercent = (Local_Player.Character.Humanoid.Health / Local_Player.Character.Humanoid.MaxHealth) * 100
+            settings.FovRadius = math.clamp(dynamicSettings.MinFOV + ((100 - healthPercent) / dynamicSettings.HealthThreshold) * (dynamicSettings.MaxFOV - dynamicSettings.MinFOV), dynamicSettings.MinFOV, dynamicSettings.MaxFOV)
+        end
+    end
 
     if settings.FovShape == "Square" then
         local halfSize = settings.FovRadius / 2
@@ -76,7 +122,7 @@ local function updateFov()
             line.Transparency = settings.FovTransparency
             table.insert(FovParts, line)
         end
-    else  -- Default to Circle
+    else 
         Fov.Visible = settings.FovVisible
         Fov.Radius = settings.FovRadius
         Fov.Position = V2(Mouse.X, Mouse.Y + (G:GetService("GuiService"):GetGuiInset().Y))
@@ -90,17 +136,95 @@ local function updateFov()
     end
 end
 
--- // Notification Function // --
+-- // Notification Function // -- @canyoulovemeback on discord / supercoolboi34
 local function sendNotification(title, text, icon)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
-        Icon = icon,
-        Duration = 5
-    })
+    if not getgenv().SharpSSilent.ToggleNotification then
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Icon = icon,
+            Duration = 5
+        })
+    end
 end
 
--- // Knock Check // --
+-- // Watermark Function // -- @canyoulovemeback on discord / supercoolboi34
+local function showWatermark()
+    if getgenv().SharpSSilent.Watermark.Enabled then
+        local screenGui = Instance.new("ScreenGui", game.CoreGui)
+        local frame = Instance.new("Frame", screenGui)
+        frame.Size = UDim2.new(0, 400, 0, 150)  -- Increased size for better visibility
+        frame.Position = UDim2.new(0.5, -200, 0.5, -75)  -- Centered on screen
+        frame.BackgroundTransparency = 1
+        frame.AnchorPoint = Vector2.new(0.5, 0.5)
+        frame.ClipsDescendants = true
+        frame.ZIndex = 2
+
+        local title = Instance.new("TextLabel", frame)
+        title.Size = UDim2.new(1, 0, 0.6, 0)
+        title.Position = UDim2.new(0, 0, 0.1, 0)
+        title.BackgroundTransparency = 1
+        title.TextColor3 = Color3.fromRGB(0, 162, 232)
+        title.Text = "S"
+        title.Font = Enum.Font.GothamBlack
+        title.TextScaled = true
+        title.TextWrapped = true
+        title.ZIndex = 3
+
+        local subtitle = Instance.new("TextLabel", frame)
+        subtitle.Size = UDim2.new(1, 0, 0.3, 0)
+        subtitle.Position = UDim2.new(0, 0, 0.7, 0)
+        subtitle.BackgroundTransparency = 1
+        subtitle.TextColor3 = Color3.fromRGB(0, 162, 232)
+        subtitle.Text = "discord.gg/sharpcc"
+        subtitle.Font = Enum.Font.Gotham
+        subtitle.TextScaled = true
+        subtitle.TextWrapped = true
+        subtitle.ZIndex = 3
+
+        frame.BackgroundTransparency = 1
+        frame:TweenSizeAndPosition(
+            UDim2.new(0, 400, 0, 150),
+            UDim2.new(0.5, -200, 0.5, -75),
+            Enum.EasingDirection.Out,
+            Enum.EasingStyle.Quad,
+            0.5,
+            true
+        )
+
+        delay(7, function()
+            frame:TweenSizeAndPosition(
+                UDim2.new(0, 0, 0, 0),
+                UDim2.new(0.5, 0, 0.5, 0),
+                Enum.EasingDirection.In,
+                Enum.EasingStyle.Quad,
+                0.5,
+                true,
+                function()
+                    screenGui:Destroy()
+                end
+            )
+        end)
+
+        if getgenv().SharpSSilent.Watermark.Sound then
+            local sound = Instance.new("Sound", SoundService)
+            sound.SoundId = "rbxassetid://9119802009"
+            sound:Play()
+            delay(3, function()
+                sound:Destroy()
+            end)
+        end
+
+        if getgenv().SharpSSilent.Watermark.Music then
+            local music = Instance.new("Sound", SoundService)
+            music.SoundId = "rbxassetid://9045766377"
+            music.Looped = true
+            music:Play()
+        end
+    end
+end
+
+-- // Knock Check // -- @canyoulovemeback on discord / supercoolboi34
 local function Death(Plr)
     if Plr.Character and Plr.Character:FindFirstChild("BodyEffects") then
         local bodyEffects = Plr.Character.BodyEffects
@@ -110,19 +234,27 @@ local function Death(Plr)
     return false
 end
 
--- // Grab Check // --
+-- // Grab Check // -- @canyoulovemeback on discord / supercoolboi34
 local function Grabbed(Plr)
     return Plr.Character and Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
 end
 
--- // Check if Part in Fov and Visible // --
+-- // Fall Check // -- @canyoulovemeback on discord / supercoolboi34
+local function isFalling(Plr)
+    if Plr.Character and Plr.Character:FindFirstChild("Humanoid") then
+        return Plr.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall
+    end
+    return false
+end
+
+-- // Check if Part in Fov and Visible // -- @canyoulovemeback on discord / supercoolboi34
 local function isPartInFovAndVisible(part)
     local screenPoint, onScreen = Current_Camera:WorldToScreenPoint(part.Position)
     local distance = (V2(screenPoint.X, screenPoint.Y) - V2(Mouse.X, Mouse.Y)).Magnitude
     return onScreen and distance <= getgenv().SharpSSilent.FovSettings.FovRadius
 end
 
--- // Check if Part Visible // --
+-- // Check if Part Visible // -- @canyoulovemeback on discord / supercoolboi34
 local function isPartVisible(part)
     if not getgenv().SharpSSilent.WallCheck then 
         return true
@@ -134,7 +266,7 @@ local function isPartVisible(part)
     return hit == part or not hit
 end
 
--- // Get Closest Hit Point on Part // --
+-- // Get Closest Hit Point on Part // -- @canyoulovemeback on discord / supercoolboi34
 local function GetClosestHitPoint(character)
     local closestPart = nil
     local closestPoint = nil
@@ -142,13 +274,28 @@ local function GetClosestHitPoint(character)
 
     for _, part in pairs(character:GetChildren()) do
         if part:IsA("BasePart") and isPartInFovAndVisible(part) and isPartVisible(part) then
-            local screenPoint, onScreen = Current_Camera:WorldToScreenPoint(part.Position)
-            local distance = (V2(screenPoint.X, screenPoint.Y) - V2(Mouse.X, Mouse.Y)).Magnitude
+            local partSize = part.Size
+            local halfSize = partSize / 2
+            local partCorners = {
+                part.CFrame * Vector3.new(-halfSize.X * 0.7, -halfSize.Y * 0.7, -halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(halfSize.X * 0.7, -halfSize.Y * 0.7, -halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(halfSize.X * 0.7, halfSize.Y * 0.7, -halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(-halfSize.X * 0.7, halfSize.Y * 0.7, -halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(-halfSize.X * 0.7, -halfSize.Y * 0.7, halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(halfSize.X * 0.7, -halfSize.Y * 0.7, halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(halfSize.X * 0.7, halfSize.Y * 0.7, halfSize.Z * 0.7),
+                part.CFrame * Vector3.new(-halfSize.X * 0.7, halfSize.Y * 0.7, halfSize.Z * 0.7)
+            }
 
-            if distance < shortestDistance then
-                closestPart = part
-                closestPoint = part.Position
-                shortestDistance = distance
+            for _, corner in pairs(partCorners) do
+                local screenPoint, onScreen = Current_Camera:WorldToScreenPoint(corner)
+                local distance = (V2(screenPoint.X, screenPoint.Y) - V2(Mouse.X, Mouse.Y)).Magnitude
+
+                if onScreen and distance < shortestDistance then
+                    closestPart = part
+                    closestPoint = corner
+                    shortestDistance = distance
+                end
             end
         end
     end
@@ -156,33 +303,75 @@ local function GetClosestHitPoint(character)
     return closestPart, closestPoint
 end
 
--- // Get Velocity Function // --
-local OldPredictionY = getgenv().SharpSSilent.Prediction
+-- // Get Closest Hit Point on Base Part // -- @canyoulovemeback on discord / supercoolboi34
+local function GetClosestBasePart(character)
+    local closestPart = nil
+    local shortestDistance = math.huge
+    local baseParts = {
+        "Head", "HumanoidRootPart", "LeftLeg", "RightLeg",
+        "LeftArm", "RightArm", "UpperTorso", "LowerTorso",
+        "LeftLowerLeg", "RightLowerLeg"
+    }
+
+    for _, partName in pairs(baseParts) do
+        local part = character:FindFirstChild(partName)
+        if part and isPartInFovAndVisible(part) and isPartVisible(part) then
+            local screenPoint, onScreen = Current_Camera:WorldToScreenPoint(part.Position)
+            local distance = (V2(screenPoint.X, screenPoint.Y) - V2(Mouse.X, Mouse.Y)).Magnitude
+
+            if onScreen and distance < shortestDistance then
+                closestPart = part
+                shortestDistance = distance
+            end
+        end
+    end
+
+    return closestPart, closestPart and closestPart.Position or nil
+end
+
+-- // Get Velocity Function // -- @canyoulovemeback on discord / supercoolboi34
 local function GetVelocity(player, part)
     if player and player.Character then
         local velocity = player.Character[part].Velocity
-        if velocity.Y < -30 and getgenv().SharpSSilent.Resolver then
-            getgenv().SharpSSilent.Prediction = 0
-            return velocity
-        elseif velocity.Magnitude > 50 and getgenv().SharpSSilent.Resolver then
+        if velocity.Y < -30 and getgenv().SharpSSilent.Prediction.Resolver then
+            return Vector3.new(velocity.X, 0, velocity.Z)
+        elseif velocity.Magnitude > 50 and getgenv().SharpSSilent.Prediction.Resolver then
             return player.Character:FindFirstChild("Humanoid").MoveDirection * 16
         else
-            getgenv().SharpSSilent.Prediction = OldPredictionY
             return velocity
         end
     end
     return Vector3.new(0, 0, 0)
 end
 
--- // Get Closest Player // --
+-- // Get Target Hit Point // -- @canyoulovemeback on discord / supercoolboi34
+local function GetTargetHitPoint(character)
+    local hitPart = character:FindFirstChild(getgenv().SharpSSilent.Targeting.HitPart)
+    if hitPart and isPartVisible(hitPart) and isPartInFovAndVisible(hitPart) then
+        return hitPart, hitPart.Position
+    end
+    return nil, nil
+end
+
+-- // Get Closest Player // -- @canyoulovemeback on discord / supercoolboi34
 local function GetClosestPlr()
     local closestTarget = nil
     local maxDistance = math.huge
 
     for _, player in pairs(Players:GetPlayers()) do
-        if player.Character and player ~= Local_Player and not Death(player) then  -- KO check using Death function
-            local closestPart, closestPoint = GetClosestHitPoint(player.Character)
-            if closestPart and closestPoint then
+        if player.Character and player ~= Local_Player and not Death(player) and not Grabbed(player) then
+            local closestPart, closestPoint
+            if getgenv().SharpSSilent.Targeting.TargetMode == "Closest" then
+                if getgenv().SharpSSilent.Targeting.ClosestHitPoint then
+                    closestPart, closestPoint = GetClosestHitPoint(player.Character)
+                else
+                    closestPart, closestPoint = GetClosestBasePart(player.Character)
+                end
+            else
+                closestPart, closestPoint = GetTargetHitPoint(player.Character)
+            end
+
+            if closestPart and closestPoint and isPartVisible(closestPart) then
                 local screenPoint = Current_Camera:WorldToScreenPoint(closestPoint)
                 local distance = (V2(screenPoint.X, screenPoint.Y) - V2(Mouse.X, Mouse.Y)).Magnitude
                 if distance < maxDistance then
@@ -196,11 +385,13 @@ local function GetClosestPlr()
     return closestTarget
 end
 
--- // Toggle Feature // --
+-- // Toggle Feature // -- @canyoulovemeback on discord / supercoolboi34
 local function toggleFeature()
     getgenv().SharpSSilent.Enabled = not getgenv().SharpSSilent.Enabled
     local status = getgenv().SharpSSilent.Enabled and "Sharp Enabled" or "Sharp Disabled"
-    sendNotification("Sharp [S] Silent", status, "rbxassetid://17561420493")
+    if not getgenv().SharpSSilent.ToggleNotification then
+        sendNotification("Sharp [S] Silent", status, "rbxassetid://17561420493")
+    end
     if not getgenv().SharpSSilent.Enabled then
         Fov.Visible = false
         HitPoint.Visible = false
@@ -208,33 +399,53 @@ local function toggleFeature()
     end
 end
 
--- // Convert Keybind to KeyCode // --
+-- // Convert Keybind to KeyCode // -- @canyoulovemeback on discord / supercoolboi34
 local function getKeyCodeFromString(key)
     return Enum.KeyCode[key]
 end
 
--- // Keybind Listener // --
+-- // Keybind Listener // -- @canyoulovemeback on discord / supercoolboi34
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if not gameProcessed and input.KeyCode == getKeyCodeFromString(getgenv().SharpSSilent.Keybind) then
         toggleFeature()
-    elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-        holdingMouseButton = true
     end
 end)
 
-UserInputService.InputEnded:Connect(function(input, gameProcessed)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        holdingMouseButton = false
-    end
-end)
-
--- // Main Loop // --
+-- // Main Loop // -- @canyoulovemeback on discord / supercoolboi34
 Run_Service.RenderStepped:Connect(function()
+    frameCounter = frameCounter + 1
     if getgenv().SharpSSilent.Enabled then
+        if getgenv().SharpSSilent.Humanization.Enabled and (tick() - lastSwitchTime < getgenv().SharpSSilent.Humanization.TargetSwitchDuration) then
+            return
+        end
+
         Target = GetClosestPlr()
+        if Target and Target.Character and getgenv().SharpSSilent.Targeting.UntargetOnFall then
+            local isCurrentlyFalling = isFalling(Target)
+            if isCurrentlyFalling then
+                if not fallStartTime[Target] then
+                    fallStartTime[Target] = tick()
+                elseif tick() - fallStartTime[Target] > getgenv().SharpSSilent.Targeting.FallThreshold then
+                    Target = nil
+                end
+            else
+                fallStartTime[Target] = nil
+            end
+        end
+
         updateFov()
         if Target and Target.Character then
-            local closestPart, closestPoint = GetClosestHitPoint(Target.Character)
+            local closestPart, closestPoint
+            if getgenv().SharpSSilent.Targeting.TargetMode == "Closest" then
+                if getgenv().SharpSSilent.Targeting.ClosestHitPoint then
+                    closestPart, closestPoint = GetClosestHitPoint(Target.Character)
+                else
+                    closestPart, closestPoint = GetClosestBasePart(Target.Character)
+                end
+            else
+                closestPart, closestPoint = GetTargetHitPoint(Target.Character)
+            end
+
             if closestPart and closestPoint then
                 local hitPointSettings = getgenv().SharpSSilent.HitPoint
                 if hitPointSettings.ShowHitPoint then
@@ -250,27 +461,47 @@ Run_Service.RenderStepped:Connect(function()
                     HitPoint.Visible = false
                 end
 
-                if holdingMouseButton then
-                    local velocity = GetVelocity(Target, closestPart.Name)
-                    Replicated_Storage.MainEvent:FireServer("UpdateMousePosI", closestPoint + velocity * getgenv().SharpSSilent.Prediction)
-                end
+                local velocity = GetVelocity(Target, closestPart.Name)
+                local predictionOffset = Vector3.new(
+                    velocity.X * getgenv().SharpSSilent.Prediction.Horizontal,
+                    velocity.Y * getgenv().SharpSSilent.Prediction.Vertical,
+                    velocity.Z * getgenv().SharpSSilent.Prediction.Horizontal
+                )
+                Replicated_Storage.MainEvent:FireServer("UpdateMousePosI", closestPoint + predictionOffset)
             end
+
+            lastSwitchTime = tick()
         else
             HitPoint.Visible = false
         end
     end
 end)
 
--- // Hook Tool Activation // --
+-- // Hook Tool Activation // -- @canyoulovemeback on discord / supercoolboi34
 local function HookTool(tool)
     if tool:IsA("Tool") then
         tool.Activated:Connect(function()
             if Target and Target.Character and tick() - lastToolUse > 0.1 then  -- Debounce for 0.1 seconds
                 lastToolUse = tick()
-                local closestPart, closestPoint = GetClosestHitPoint(Target.Character)
+                local closestPart, closestPoint
+                if getgenv().SharpSSilent.Targeting.TargetMode == "Closest" then
+                    if getgenv().SharpSSilent.Targeting.ClosestHitPoint then
+                        closestPart, closestPoint = GetClosestHitPoint(Target.Character)
+                    else
+                        closestPart, closestPoint = GetClosestBasePart(Target.Character)
+                    end
+                else
+                    closestPart, closestPoint = GetTargetHitPoint(Target.Character)
+                end
+
                 if closestPart and closestPoint then
                     local velocity = GetVelocity(Target, closestPart.Name)
-                    Replicated_Storage.MainEvent:FireServer("UpdateMousePosI", closestPoint + velocity * getgenv().SharpSSilent.Prediction)
+                    local predictionOffset = Vector3.new(
+                        velocity.X * getgenv().SharpSSilent.Prediction.Horizontal,
+                        velocity.Y * getgenv().SharpSSilent.Prediction.Vertical,
+                        velocity.Z * getgenv().SharpSSilent.Prediction.Horizontal
+                    )
+                    Replicated_Storage.MainEvent:FireServer("UpdateMousePosI", closestPoint + predictionOffset)
                 end
             end
         end)
@@ -289,29 +520,9 @@ if Local_Player.Character then
     onCharacterAdded(Local_Player.Character)
 end
 
--- // Initial Notification // --
+-- // Initial Notification // -- @canyoulovemeback on discord / supercoolboi34
 sendNotification("dc.gg/sharpcc", "♣️ #1 Triggerbot", "rbxassetid://17561420493")
 wait(3)
 sendNotification("dc.gg/sharpcc", "♣️ Supports Solara", "rbxassetid://17561420493")
---[[ 
 
-Go get to Skidding !! Source Made By @wxrpedd & @canyoulovemeback on Discord,
-Everything is from scrap took us like 10 mins to make this so have fun.
-
---]]
---[[
-
- ________  ___  ___  ________  ________  ________   ________  ________     
-|\   ____\|\  \|\  \|\   __  \|\   __  \|\   __  \ |\   ____\|\   ____\    
-\ \  \___|\ \  \\\  \ \  \|\  \ \  \|\  \ \  \|\  \\ \  \___|\ \  \___|    
- \ \_____  \ \   __  \ \   __  \ \   _  _\ \   ____\\ \  \    \ \  \       
-  \|____|\  \ \  \ \  \ \  \ \  \ \  \\  \\ \  \___|_\ \  \____\ \  \____  
-    ____\_\  \ \__\ \__\ \__\ \__\ \__\\ _\\ \__\ |\__\ \_______\ \_______\
-   |\_________\|__|\|__|\|__|\|__|\|__|\|__|\|__| \|__|\|_______|\|_______|
-   \|_________|                                                            
-
-                                                                    
-discord.gg/sharpcc
-supercoolboi34 @canyoulovemeback
-Kai @wxrpedd
---]]
+showWatermark()
