@@ -29,7 +29,7 @@ The Work and its original content, features, and functionality are and will rema
 
 6. DMCA Compliance
 
-If you believe that your use of the Work has been unfairly restricted or if you need to report unauthorized use of your Work, please contact the author at @catfanclub@proton.me to discuss the matter. Infringing content will be subject to a DMCA takedown request.
+If you believe that your use of the Work has been unfairly restricted or if you need to report unauthorized use of your Work, please contact the author at catfanclub@proton.me to discuss the matter. Infringing content will be subject to a DMCA takedown request.
 
 7. Termination
 
