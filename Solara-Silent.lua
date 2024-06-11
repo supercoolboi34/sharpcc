@@ -4,7 +4,7 @@
 -- [+] Enable / Disabled Notification Toggle
 -- [+] * Prediction
 -- [+] Horizontal
- --[+] Vertical
+-- [+] Vertical
 -- [+] Added Prediction Adjustment
 -- [+] * Targeting
 -- [+] TargetMode ["Closest" & "HitPart"]
@@ -30,9 +30,8 @@ its not my fault or anyones fault in my team your using Cheats at your OWN RISK,
 so be careful and check for Da Hood updates before using it.
 --]]
 --[[ Copying: 
-if your getting banned using Sharp Solara Silent, while da hood updated and,
-its not my fault or anyones fault in my team your using Cheats at your OWN RISK,
-so be careful and check for Da Hood updates before using it.
+please dont just copy anything without credits, if you wanna make a better remake,
+or anything atleast give me credits and dont remove the watermark, read the README file.
 --]]
 
 -- // Services // -- @canyoulovemeback on discord / supercoolboi34
