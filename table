@@ -19,15 +19,14 @@ local V3 = Vector3.new
 local C3 = Color3.fromRGB
 
 getgenv().Sharp = {
-    ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLES "" ]
+    ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLS "" ]
     ['Global'] = {
         ['Death'] = {Self = true, Target = true},
-        ['Team'] = false, -- [ UNIVERSAL ]
         ['Checks'] = {
             ['Grabbed'] = true,
             ['Reloading'] = true,
-            ['GunCheck'] = false, -- [ DOESNT STAB WITH KNIFE WHEN TOGGLE ENABLED ]
-            ['FoodCheck'] = true, -- [ DOESNT USES FOOD WHEN TOGGLE ENABLED ]
+            ['GunCheck'] = false, -- [ DOESN'T STAB WITH KNIFE WHEN TOGGLE ENABLED ]
+            ['FoodCheck'] = false, -- [ DOESN'T USE FOOD WHEN TOGGLE ENABLED ]
             ['CrewCheck'] = false,
         },
         ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
@@ -36,7 +35,7 @@ getgenv().Sharp = {
     ['Main'] = {
         ['Enabled'] = true,
         ['Keybind'] = "C",
-        ['KeybindMode'] = "Toggle", -- [Hold or Toggle
+        ['KeybindMode'] = "Toggle", -- [Hold or Toggle]
         ['Delay'] = 0.01, -- [Shoot Delay]
         ['NotifyOnExecute'] = true, -- [Notifies when executed]
         ['Visualizing'] = {
@@ -48,6 +47,20 @@ getgenv().Sharp = {
             ['Vertical'] = 0.10800,
             ['AutoPrediction'] = false, -- [BETA]
         },
+        ['AimAssist'] = {
+            ['Enabled'] = false,
+            ['Keybind'] = "V",
+            ['Smoothness'] = 0.5,
+            ['SmoothingEnabled'] = false,
+            ['HighlightTarget'] = true,
+            ['HighlightThroughWall'] = false, -- [Toggle for highlighting through walls]
+            ['HighlightModeColor'] = "Health", -- ["Health", "Random", "Rainbow"]
+            ['HitPart'] = "HumanoidRootPart",
+            ['Prediction'] = {
+                ['Horizontal'] = 0.12200,
+                ['Vertical'] = 0.10810,
+            },
+        },
     },
     ['Color'] = {
         ['Enabled'] = false,
@@ -56,13 +69,17 @@ getgenv().Sharp = {
         ['Saturation'] = 0.9,
     },
     ['Whitelists'] = {
-        ['RobloxIDs'] = {123456, 123456}, -- [Add Roblox Profile User iD's Here]
+        ['RobloxIDs'] = {123456, 123456}, -- [Add Roblox Profile User IDs Here]
         ['FriendCheck'] = false,
     },
     ['PanicMode'] = {
-        ['Enabled'] = true,
+        ['Enabled'] = false,
         ['Keybind'] = "K", 
         ['Mode'] = "Crash" -- [Kick or Crash] (Crash is more Legit, Kick says "Sharp Kicked You!")
+    },
+    ['Logging'] = { -- [SERVER INFO CHACHER] BETA
+        ['Enabled'] = false,
+        ['LogFilePath'] = "Sharp.cc/sharp_log.txt"
     }
 }
 
