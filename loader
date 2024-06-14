@@ -13,4 +13,4 @@
 script_key = getgenv().Sharp.Key;
 
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/verified/9f7e5fdc25e7985e64f3894aa115a2ac.lua"))()
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a9d37ac24089b34c35039b7676c1aeb5.lua"))()
