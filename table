@@ -47,6 +47,7 @@ getgenv().Sharp = {
             ['Vertical'] = 0.10800,
             ['AutoPrediction'] = false, -- [BETA]
         },
+    },
     ['Color'] = {
         ['Enabled'] = false,
         ['Brightness'] = 0.1,
