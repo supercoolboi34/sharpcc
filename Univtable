@@ -10,38 +10,33 @@
 
                                                                     
 discord.gg/sharpcc
-supercoolboi34 @canyoulovemeback
-Kai @wxrpedd
 --]]
 
-local V2 = Vector2.new
-local V3 = Vector3.new
-local C3 = Color3.fromRGB
-
 getgenv().Sharp = {
-    ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLES "" ]
+    ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLS "" ]
     ['Global'] = {
         ['Death'] = {Self = true, Target = true},
-        ['Team'] = false, -- [ UNIVERSAL ]
+        ['Team'] = false,
         ['Grabbed'] = true,
         ['Reloading'] = true,
-        ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
+        ['Forcefield'] = true,
+        ['UncapFPS'] = true,
         ['Resolver'] = true,
     },
     ['Main'] = {
         ['Enabled'] = true,
-        ['Keybind'] = "C",
-        ['KeybindMode'] = "Toggle", -- [Hold or Toggle
-        ['Delay'] = 0.03, -- [Shoot Delay]
-        ['NotifyOnExecute'] = true, -- [Notifies when executed]
+        ['Keybind'] = "MouseButton2",
+        ['KeybindMode'] = "Hold",
+        ['Delay'] = 0.03,
+        ['NotifyOnExecute'] = true,
         ['Visualizing'] = {
             ['SendNotification'] = false,
-            ['Box'] = {Visible = false, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
+            ['Box'] = {Visible = false, Size = Vector3.new(1.4, 4.7, 1.3), Color = Color3.fromRGB(3, 100, 255)},
         },
         ['Prediction'] = {
-            ['Horizontal'] = 0.1200, 
-            ['Vertical'] = 0.10800,
-            ['AutoPrediction'] = false, -- [BETA]
+            ['Horizontal'] = 0.12261, 
+            ['Vertical'] = 0.10791,
+            ['AutoPrediction'] = false,
         },
     },
     ['Color'] = {
@@ -51,7 +46,7 @@ getgenv().Sharp = {
         ['Saturation'] = 0.9,
     },
     ['Whitelists'] = {
-        ['RobloxIDs'] = {123456, 123456}, -- [Add Roblox Profile User iD's Here]
+        ['RobloxIDs'] = {123456, 123456},
         ['FriendCheck'] = false,
     },
 }
