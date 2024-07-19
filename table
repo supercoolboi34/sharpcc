@@ -30,7 +30,7 @@ getgenv().Sharp = {
     },
     ['Main'] = {
         ['Enabled'] = true,
-        ['Keybind'] = "C", -- [ MouseButton 1,2,3 Supported ]
+        ['Keybind'] = "C", -- [ MouseButton1,2,3 Supported ]
         ['KeybindMode'] = "Toggle", -- [Hold or Toggle]
         ['Delay'] = 0.01, -- [Shoot Delay]
         ['NotifyOnExecute'] = true, -- [Notifies On Execute]
