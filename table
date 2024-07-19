@@ -10,42 +10,38 @@
 
                                                                     
 discord.gg/sharpcc
-supercoolboi34 @canyoulovemeback
-Kai @wxrpedd
 --]]
-
-local V2 = Vector2.new
-local V3 = Vector3.new
-local C3 = Color3.fromRGB
 
 getgenv().Sharp = {
     ['Key'] = "", -- [ PASTE YOUR LUARMOR KEY BETWEEN THOSE SYMBOLS "" ]
     ['Global'] = {
-        ['Death'] = {Self = true, Target = true},
+        ['Death'] = {Self = true, Target = true}, -- [ Knock Check idk why this is here tbh ]
         ['Checks'] = {
-            ['Grabbed'] = true,
-            ['Reloading'] = true,
-            ['GunCheck'] = false, -- [ DOESN'T STAB WITH KNIFE WHEN TOGGLE ENABLED ]
-            ['FoodCheck'] = false, -- [ DOESN'T USE FOOD WHEN TOGGLE ENABLED ]
-            ['CrewCheck'] = false,
+            ['Grabbed'] = true, -- [ Doesnt't Shoots A Grabbed Person ]
+            ['Reloading'] = true, -- [ Doesnt't while Reloading toggle enabled ]
+            ['GunCheck'] = true, -- [ Doesnt't stab with knife or punches when toggle enabled ]
+            ['FoodCheck'] = true, -- [ Doesn't uses food while toggle enabled ]
+            ['CrewCheck'] = true, -- [ Doesn't shoot crew members ]
+            ['Chatting'] = true, -- [ Disables actions when chatting ]
         },
-        ['Forcefield'] = true, -- [ SPAWN PROTECTION ]
-        ['Resolver'] = false,
+        ['Forcefield'] = true, -- [ Enemies Spawn Protection Check ]
+        ['UncapFPS'] = true, -- [ Uncaps FPS when enabled ]
+        ['Resolver'] = false, -- [ Anti Lock Resolver ]
     },
     ['Main'] = {
         ['Enabled'] = true,
-        ['Keybind'] = "C",
-        ['KeybindMode'] = "Toggle", -- [Hold or Toggle]
+        ['Keybind'] = "MouseButton2", -- [ MouseButton 1,2,3 Supported ]
+        ['KeybindMode'] = "Hold", -- [Hold or Toggle]
         ['Delay'] = 0.01, -- [Shoot Delay]
-        ['NotifyOnExecute'] = true, -- [Notifies when executed]
+        ['NotifyOnExecute'] = true, -- [Notifies On Execute]
         ['Visualizing'] = {
             ['SendNotification'] = false,
-            ['Box'] = {Visible = false, Size = V3(1.4, 4.6, 1.2), Color = C3(3, 100, 255)},
+            ['Box'] = {Visible = false, Size = Vector3.new(1.4, 4.6, 1.2), Color = Color3.fromRGB(3, 100, 255)},
         },
         ['Prediction'] = {
-            ['Horizontal'] = 0.12000, 
+            ['Horizontal'] = 0.12000,
             ['Vertical'] = 0.10800,
-            ['AutoPrediction'] = false, -- [BETA]
+            ['AutoPrediction'] = false, -- [ Not Really Accurate BETA]
         },
     },
     ['Color'] = {
