@@ -2,7 +2,8 @@ getgenv().Sharp = {
     ["Key"] = "Key-here", -- // Script Key
     ["Main"] = {
         ["Keybind"] = "C", -- // MouseButton1,2,3
-        ["KeybindMode"] = "Toggle" -- // Toggle or Hold
+        ["KeybindMode"] = "Toggle", -- // Toggle or Hold
+        ["NotifyOnExecute"] = true,
     },
     ["Shooting"] = {
         ["Delay"] = 0.1,
