@@ -16,4 +16,4 @@ getgenv().Sharp = {
     }
 }
 
-loadstring(game:HttpGet("https://github.com/supercoolboi34/sharpcc/blob/main/rivalsloader"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/main/rivalsloader"))()
