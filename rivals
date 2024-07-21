@@ -1,5 +1,5 @@
 getgenv().Sharp = {
-    ["Key"] = "", -- // Script Key
+    ["Key"] = "Key-here", -- // Script Key
     ["Main"] = {
         ["Keybind"] = "C", -- // MouseButton1,2,3
         ["KeybindMode"] = "Toggle" -- // Toggle or Hold
