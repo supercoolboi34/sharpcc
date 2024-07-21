@@ -1,0 +1,19 @@
+getgenv().Sharp = {
+    ["Key"] = "" -- // Script Key
+    ["Main"] = {
+        ["Keybind"] = "C", -- // MouseButton1,2,3
+        ["KeybindMode"] = "Toggle" -- // Toggle or Hold
+    },
+    ["Shooting"] = {
+        ["Delay"] = 0.1,
+        ["RandomizeDelay"] = false
+    },
+    ["Visuals"] = {
+        ["Enabled"] = false,
+        ["UseKeybind"] = true,
+        ["ESPKeybind"] = "L",
+        ["ESPColor"] = {255, 0, 255}
+    }
+}
+
+loadstring(game:HttpGet("https://github.com/supercoolboi34/sharpcc/blob/main/rivalsloader"))()
