@@ -21,7 +21,7 @@ getgenv().Sharp = {
         ['Reloading'] = true,
         ['Forcefield'] = true,
         ['UncapFPS'] = true,
-        ['Resolver'] = false,
+        ['Resolver'] = true,
     },
     ['Main'] = {
         ['Enabled'] = true,
@@ -31,14 +31,12 @@ getgenv().Sharp = {
         ['NotifyOnExecute'] = true,
         ['Visualizing'] = {
             ['SendNotification'] = false,
-            ['Box'] = {Visible = false, Size = Vector3.new(1.4, 4.7, 1.3), Color = Color3.fromRGB(3, 30, 70)},
+            ['Box'] = {Visible = false, Size = Vector3.new(1.4, 4.7, 1.3), Color = Color3.fromRGB(3, 100, 255)},
         },
         ['Prediction'] = {
-            ['Horizontal'] = 0.12600,
-            ['Vertical'] = 0.10750,
-            ['AutoPrediction'] = {
-                ['Enabled'] = false,
-            },
+            ['Horizontal'] = 0.12250, 
+            ['Vertical'] = 0.10790,
+            ['AutoPrediction'] = false,
         },
     },
     ['Color'] = {
