@@ -9,8 +9,6 @@
    \|_________|                                                                                                                                
 --]]
 
-getgenv().script_key = script_key;
-
 script_key = getgenv().Sharp.Key;
 
 
