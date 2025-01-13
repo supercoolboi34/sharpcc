@@ -13,21 +13,20 @@ function NotificationLibrary:Notification(text, duration, textColor)
     textColor = textColor or Color3.fromRGB(255, 255, 255)
 
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, 300, 0, 30)
-    frame.Position = UDim2.new(0.5, -150, 0.75, 0)
+    frame.Size = UDim2.new(0, 250, 0, 25)
+    frame.Position = UDim2.new(0.5, -125, 0.8, 0)
     frame.BackgroundTransparency = 1
     frame.Parent = screenGui
-    frame.ClipsDescendants = true
 
     local textLabel = Instance.new("TextLabel")
     textLabel.Size = UDim2.new(1, 0, 1, 0)
-    textLabel.TextTransparency = 1
     textLabel.BackgroundTransparency = 1
-    textLabel.TextSize = 20
+    textLabel.TextSize = 18
     textLabel.RichText = true
     textLabel.Text = ""
-    textLabel.Font = Enum.Font.GothamBold
+    textLabel.Font = Enum.Font.Gotham
     textLabel.TextColor3 = textColor
+    textLabel.TextTransparency = 0
     textLabel.Parent = frame
 
     local function generateRandomString(length)
@@ -41,12 +40,12 @@ function NotificationLibrary:Notification(text, duration, textColor)
     end
 
     local function typeTextEffect(finalText)
-        textLabel.TextTransparency = 0
         local tempText = generateRandomString(#finalText)
+        textLabel.Text = tempText
         for i = 1, #finalText do
             tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
             textLabel.Text = tempText
-            wait(0.03)
+            wait(0.025)
         end
     end
 
@@ -54,10 +53,6 @@ function NotificationLibrary:Notification(text, duration, textColor)
 
     wait(duration)
 
-    local textFadeOut = TweenService:Create(textLabel, TweenInfo.new(0.3), {TextTransparency = 1})
-    textFadeOut:Play()
-
-    wait(0.3)
     frame:Destroy()
 end
 
