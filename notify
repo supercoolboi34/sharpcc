@@ -1,0 +1,68 @@
+local NotificationLibrary = {}
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local playerGui = player:FindFirstChildOfClass("PlayerGui") or Instance.new("ScreenGui", player)
+playerGui.Name = "NotificationGui"
+
+function NotificationLibrary:Notification(text, duration)
+    duration = duration or 5 -- Default duration
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 400, 0, 50)
+    frame.Position = UDim2.new(0.5, -200, 0.8, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    frame.BackgroundTransparency = 0.3
+    frame.BorderSizePixel = 0
+    frame.Parent = playerGui
+
+    -- Add UICorner for smooth edges
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(0, 8)
+    uiCorner.Parent = frame
+
+    local uiStroke = Instance.new("UIStroke")
+    uiStroke.Thickness = 1.5
+    uiStroke.Transparency = 0.3
+    uiStroke.Color = Color3.fromRGB(255, 255, 255)
+    uiStroke.Parent = frame
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.TextTransparency = 1
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextSize = 22
+    textLabel.RichText = true
+    textLabel.Text = ""
+    textLabel.Font = Enum.Font.SourceSansBold
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.Parent = frame
+
+    local fadeIn = TweenService:Create(frame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0})
+    fadeIn:Play()
+
+    local function typeText(txt)
+        textLabel.Text = ""
+        for i = 1, #txt do
+            textLabel.Text = string.sub(txt, 1, i)
+            wait(0.03) -- Typing speed
+        end
+        TweenService:Create(textLabel, TweenInfo.new(0.5), {TextTransparency = 0}):Play()
+    end
+
+    typeText(text)
+
+    wait(duration)
+
+    local fadeOut = TweenService:Create(frame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
+    local textFadeOut = TweenService:Create(textLabel, TweenInfo.new(0.5), {TextTransparency = 1})
+    fadeOut:Play()
+    textFadeOut:Play()
+
+    wait(0.5)
+    frame:Destroy()
+end
+
+return NotificationLibrary
