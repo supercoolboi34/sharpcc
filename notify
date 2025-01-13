@@ -9,7 +9,7 @@ screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
 local function extractPlainText(richText)
-    return richText:gsub("<[^>]->", "") -- Remove HTML tags like <font>
+    return richText:gsub("<[^>]->", "") -- Removes all HTML-like tags
 end
 
 function NotificationLibrary:Notification(text, duration, textColor)
@@ -45,18 +45,20 @@ function NotificationLibrary:Notification(text, duration, textColor)
         return result
     end
 
-    local function typeTextEffect(finalText)
+    local function typeTextEffect(finalText, fullRichText)
         local tempText = generateRandomString(#finalText)
         textLabel.Text = tempText
+
         for i = 1, #finalText do
             tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
             textLabel.Text = tempText
             wait(0.02)
         end
-        textLabel.Text = text
+
+        textLabel.Text = fullRichText -- Apply full HTML format only after animation
     end
 
-    typeTextEffect(plainText)
+    typeTextEffect(plainText, text)
 
     wait(duration)
 
