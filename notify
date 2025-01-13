@@ -9,26 +9,25 @@ screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
 local function extractPlainText(richText)
-    return richText:gsub("<[^>]->", "") -- Remove all <font> tags
+    return richText:gsub("<[^>]->", "") -- Remove <font> tags during animation
 end
 
-function NotificationLibrary:Notification(text, duration, typeSpeed, randomLength)
-    duration = duration or 5
-    typeSpeed = typeSpeed or 0.03
-    randomLength = randomLength or 10
+function NotificationLibrary:Notification(text, typeSpeed, randomLength)
+    typeSpeed = typeSpeed or 0.02
+    randomLength = randomLength or 15
 
     local plainText = extractPlainText(text)
 
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, 250, 0, 25)
-    frame.Position = UDim2.new(0.5, -125, 0.8, 0)
+    frame.Size = UDim2.new(0, 300, 0, 30)
+    frame.Position = UDim2.new(0.5, -150, 0.8, 0)
     frame.BackgroundTransparency = 1
     frame.Parent = screenGui
 
     local textLabel = Instance.new("TextLabel")
     textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.BackgroundTransparency = 1
-    textLabel.TextSize = 18
+    textLabel.TextSize = 22 -- Bigger text
     textLabel.RichText = true
     textLabel.Text = ""
     textLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
@@ -52,18 +51,21 @@ function NotificationLibrary:Notification(text, duration, typeSpeed, randomLengt
 
         for i = 1, #finalText do
             tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
-            textLabel.Text = tempText
+            textLabel.Text = "<font color='rgb(255,255,255)'>" .. tempText .. "</font>" -- Keeps color during animation
             wait(typeSpeed)
         end
 
         textLabel.Text = fullRichText
+
+        local fadeOut = TweenService:Create(textLabel, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1})
+        wait(1)
+        fadeOut:Play()
+
+        wait(0.5)
+        frame:Destroy()
     end
 
     typeTextEffect(plainText, text)
-
-    wait(duration)
-
-    frame:Destroy()
 end
 
 return NotificationLibrary
