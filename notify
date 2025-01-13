@@ -9,11 +9,13 @@ screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
 local function extractPlainText(richText)
-    return richText:gsub("<[^>]->", "") -- Removes all HTML like tags
+    return richText:gsub("<[^>]->", "") -- Remove all <font> tags
 end
 
-function NotificationLibrary:Notification(text, duration, textColor)
+function NotificationLibrary:Notification(text, duration, typeSpeed, randomLength, textColor)
     duration = duration or 5
+    typeSpeed = typeSpeed or 0.03
+    randomLength = randomLength or 10
     textColor = textColor or Color3.fromRGB(255, 255, 255)
 
     local plainText = extractPlainText(text)
@@ -30,7 +32,7 @@ function NotificationLibrary:Notification(text, duration, textColor)
     textLabel.TextSize = 18
     textLabel.RichText = true
     textLabel.Text = ""
-    textLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    textLabel.FontFace = Font.new("rbxasset://fonts/families/Gotham.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
     textLabel.TextColor3 = textColor
     textLabel.TextTransparency = 0
     textLabel.Parent = frame
@@ -46,16 +48,16 @@ function NotificationLibrary:Notification(text, duration, textColor)
     end
 
     local function typeTextEffect(finalText, fullRichText)
-        local tempText = generateRandomString(#finalText)
+        local tempText = generateRandomString(math.min(randomLength, #finalText))
         textLabel.Text = tempText
 
         for i = 1, #finalText do
             tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
             textLabel.Text = tempText
-            wait(0.02)
+            wait(typeSpeed)
         end
 
-        textLabel.Text = fullRichText -- Apply full HTML format only after animation
+        textLabel.Text = fullRichText
     end
 
     typeTextEffect(plainText, text)
