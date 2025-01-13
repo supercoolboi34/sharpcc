@@ -10,6 +10,7 @@
 --]]
 
 
-getgenv().script_key = getgenv().Sharp.Key
+if not game.IsLoaded(game) then game.Loaded.Wait(game.Loaded); end
+getgenv().script_key = getgenv().Sharp.Key;
 
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/beee445d8e63bff271ba455c2c42ba61.lua"))()
