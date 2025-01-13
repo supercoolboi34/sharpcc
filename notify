@@ -12,11 +12,10 @@ local function extractPlainText(richText)
     return richText:gsub("<[^>]->", "") -- Remove all <font> tags
 end
 
-function NotificationLibrary:Notification(text, duration, typeSpeed, randomLength, textColor)
+function NotificationLibrary:Notification(text, duration, typeSpeed, randomLength)
     duration = duration or 5
     typeSpeed = typeSpeed or 0.03
     randomLength = randomLength or 10
-    textColor = textColor or Color3.fromRGB(255, 255, 255)
 
     local plainText = extractPlainText(text)
 
@@ -33,7 +32,7 @@ function NotificationLibrary:Notification(text, duration, typeSpeed, randomLengt
     textLabel.RichText = true
     textLabel.Text = ""
     textLabel.FontFace = Font.new("rbxasset://fonts/families/Gotham.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
-    textLabel.TextColor3 = textColor
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     textLabel.TextTransparency = 0
     textLabel.Parent = frame
 
