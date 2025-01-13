@@ -9,7 +9,7 @@ screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
 local function extractPlainText(richText)
-    return richText:gsub("<[^>]->", "") -- Removes all HTML-like tags
+    return richText:gsub("<[^>]->", "") -- Removes all HTML like tags
 end
 
 function NotificationLibrary:Notification(text, duration, textColor)
