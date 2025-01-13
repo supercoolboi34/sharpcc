@@ -31,7 +31,7 @@ function NotificationLibrary:Notification(text, duration, typeSpeed, randomLengt
     textLabel.TextSize = 18
     textLabel.RichText = true
     textLabel.Text = ""
-    textLabel.FontFace = Font.new("rbxasset://fonts/families/Gotham.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+    textLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
     textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     textLabel.TextTransparency = 0
     textLabel.Parent = frame
