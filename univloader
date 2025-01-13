@@ -12,8 +12,4 @@
 
 getgenv().script_key = getgenv().Sharp.Key
 
-if not key then
-    getgenv().script_key = getgenv().sharp_luarmor_fix
-end
-
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/beee445d8e63bff271ba455c2c42ba61.lua"))()
