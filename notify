@@ -8,9 +8,15 @@ screenGui.Name = "NotificationGui"
 screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
+local function extractPlainText(richText)
+    return richText:gsub("<[^>]->", "") -- Remove HTML tags like <font>
+end
+
 function NotificationLibrary:Notification(text, duration, textColor)
     duration = duration or 5
     textColor = textColor or Color3.fromRGB(255, 255, 255)
+
+    local plainText = extractPlainText(text)
 
     local frame = Instance.new("Frame")
     frame.Size = UDim2.new(0, 250, 0, 25)
@@ -24,13 +30,13 @@ function NotificationLibrary:Notification(text, duration, textColor)
     textLabel.TextSize = 18
     textLabel.RichText = true
     textLabel.Text = ""
-    textLabel.Font = Enum.Font.Gotham
+    textLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
     textLabel.TextColor3 = textColor
     textLabel.TextTransparency = 0
     textLabel.Parent = frame
 
     local function generateRandomString(length)
-        local characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        local characters = "!@#$%^&*()_+=-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         local result = ""
         for i = 1, length do
             local randIndex = math.random(1, #characters)
@@ -45,11 +51,12 @@ function NotificationLibrary:Notification(text, duration, textColor)
         for i = 1, #finalText do
             tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
             textLabel.Text = tempText
-            wait(0.025)
+            wait(0.02)
         end
+        textLabel.Text = text
     end
 
-    typeTextEffect(text)
+    typeTextEffect(plainText)
 
     wait(duration)
 
