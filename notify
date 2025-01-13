@@ -20,7 +20,7 @@ function NotificationLibrary:Notification(text, duration, fadeOutTime)
 
     local frame = Instance.new("Frame")
     frame.Size = UDim2.new(0, 400, 0, 45)
-    frame.Position = UDim2.new(0.5, -200, 1, 0)
+    frame.Position = UDim2.new(0.5, -200, 1, 0) -- Start below for smooth slide-in
     frame.BackgroundTransparency = 1
     frame.Parent = screenGui
 
@@ -69,10 +69,7 @@ function NotificationLibrary:Notification(text, duration, fadeOutTime)
     wait(duration)
 
     local fadeOut = TweenService:Create(textLabel, TweenInfo.new(fadeOutTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1})
-    local slideOut = TweenService:Create(frame, TweenInfo.new(fadeOutTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -200, 1, 0)})
-
     fadeOut:Play()
-    slideOut:Play()
 
     wait(fadeOutTime)
     frame:Destroy()
