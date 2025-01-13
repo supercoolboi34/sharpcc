@@ -12,28 +12,36 @@ local function extractPlainText(richText)
     return richText:gsub("<[^>]->", "") -- Remove <font> tags during animation
 end
 
-function NotificationLibrary:Notification(text, typeSpeed, randomLength)
-    typeSpeed = typeSpeed or 0.02
-    randomLength = randomLength or 15
+function NotificationLibrary:Notification(text, duration, fadeOutTime)
+    duration = duration or 5
+    fadeOutTime = fadeOutTime or 0.5
 
     local plainText = extractPlainText(text)
 
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, 300, 0, 30)
-    frame.Position = UDim2.new(0.5, -150, 0.8, 0)
+    frame.Size = UDim2.new(0, 350, 0, 40)
+    frame.Position = UDim2.new(0.5, -175, 0.8, 0)
     frame.BackgroundTransparency = 1
     frame.Parent = screenGui
 
     local textLabel = Instance.new("TextLabel")
     textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.BackgroundTransparency = 1
-    textLabel.TextSize = 22 -- Bigger text
+    textLabel.TextSize = 18
     textLabel.RichText = true
     textLabel.Text = ""
     textLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json")
     textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    textLabel.TextTransparency = 0
+    textLabel.TextTransparency = 1 -- Start transparent for fade-in
     textLabel.Parent = frame
+
+    -- Fade-in effect
+    local fadeIn = TweenService:Create(textLabel, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0})
+    fadeIn:Play()
+    
+    -- Smooth pop-up effect
+    local popUp = TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -175, 0.75, 0)})
+    popUp:Play()
 
     local function generateRandomString(length)
         local characters = "!@#$%^&*()_+=-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -46,26 +54,28 @@ function NotificationLibrary:Notification(text, typeSpeed, randomLength)
     end
 
     local function typeTextEffect(finalText, fullRichText)
-        local tempText = generateRandomString(math.min(randomLength, #finalText))
+        local tempText = generateRandomString(#finalText)
         textLabel.Text = tempText
 
         for i = 1, #finalText do
             tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
-            textLabel.Text = "<font color='rgb(255,255,255)'>" .. tempText .. "</font>" -- Keeps color during animation
-            wait(typeSpeed)
+            textLabel.Text = tempText
+            wait(0.015) -- Faster typing
         end
 
         textLabel.Text = fullRichText
-
-        local fadeOut = TweenService:Create(textLabel, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1})
-        wait(1)
-        fadeOut:Play()
-
-        wait(0.5)
-        frame:Destroy()
     end
 
     typeTextEffect(plainText, text)
+
+    wait(duration)
+
+    -- Fade-out effect
+    local fadeOut = TweenService:Create(textLabel, TweenInfo.new(fadeOutTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1})
+    fadeOut:Play()
+
+    wait(fadeOutTime)
+    frame:Destroy()
 end
 
 return NotificationLibrary
