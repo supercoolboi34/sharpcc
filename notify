@@ -8,53 +8,53 @@ screenGui.Name = "NotificationGui"
 screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
-function NotificationLibrary:Notification(text, duration)
+function NotificationLibrary:Notification(text, duration, textColor)
     duration = duration or 5
+    textColor = textColor or Color3.fromRGB(255, 255, 255)
 
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, 400, 0, 50)
-    frame.Position = UDim2.new(0.5, -200, 0.75, 0)
-    frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    frame.BackgroundTransparency = 0.2
-    frame.BorderSizePixel = 0
+    frame.Size = UDim2.new(0, 300, 0, 30)
+    frame.Position = UDim2.new(0.5, -150, 0.75, 0)
+    frame.BackgroundTransparency = 1
     frame.Parent = screenGui
     frame.ClipsDescendants = true
-
-    local uiCorner = Instance.new("UICorner")
-    uiCorner.CornerRadius = UDim.new(0, 8)
-    uiCorner.Parent = frame
 
     local textLabel = Instance.new("TextLabel")
     textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.TextTransparency = 1
     textLabel.BackgroundTransparency = 1
-    textLabel.TextSize = 22
+    textLabel.TextSize = 20
     textLabel.RichText = true
     textLabel.Text = ""
-    textLabel.Font = Enum.Font.SourceSansBold
-    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.TextColor3 = textColor
     textLabel.Parent = frame
 
-    frame.BackgroundTransparency = 1
-    local fadeIn = TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.2})
-
-    local function typeText(txt)
-        textLabel.Text = ""
-        for i = 1, #txt do
-            textLabel.Text = string.sub(txt, 1, i)
-            wait(0.025)
+    local function generateRandomString(length)
+        local characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        local result = ""
+        for i = 1, length do
+            local randIndex = math.random(1, #characters)
+            result = result .. string.sub(characters, randIndex, randIndex)
         end
-        TweenService:Create(textLabel, TweenInfo.new(0.3), {TextTransparency = 0}):Play()
+        return result
     end
 
-    fadeIn:Play()
-    typeText(text)
+    local function typeTextEffect(finalText)
+        textLabel.TextTransparency = 0
+        local tempText = generateRandomString(#finalText)
+        for i = 1, #finalText do
+            tempText = string.sub(tempText, 1, i - 1) .. string.sub(finalText, i, i) .. string.sub(tempText, i + 1)
+            textLabel.Text = tempText
+            wait(0.03)
+        end
+    end
+
+    typeTextEffect(text)
 
     wait(duration)
 
-    local fadeOut = TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
     local textFadeOut = TweenService:Create(textLabel, TweenInfo.new(0.3), {TextTransparency = 1})
-    fadeOut:Play()
     textFadeOut:Play()
 
     wait(0.3)
