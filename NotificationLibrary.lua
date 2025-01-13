@@ -8,6 +8,8 @@ screenGui.Name = "NotificationGui"
 screenGui.Parent = CoreGui
 screenGui.ResetOnSpawn = false
 
+local activeNotifications = {}
+
 local function extractPlainText(richText)
     return richText:gsub("<[^>]->", "")
 end
@@ -35,7 +37,12 @@ function NotificationLibrary:Notification(text, duration, fadeOutTime)
     textLabel.TextTransparency = 1
     textLabel.Parent = frame
 
-    local slideIn = TweenService:Create(frame, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -200, 0.85, 0)})
+    local startPosition = #activeNotifications
+    frame.Position = UDim2.new(0.5, -200, 0.85 - (startPosition * 0.07), 0)
+
+    table.insert(activeNotifications, frame)
+
+    local slideIn = TweenService:Create(frame, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -200, 0.85 - (startPosition * 0.07), 0)})
     local fadeIn = TweenService:Create(textLabel, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0})
 
     slideIn:Play()
@@ -66,13 +73,20 @@ function NotificationLibrary:Notification(text, duration, fadeOutTime)
 
     typeTextEffect(plainText, text)
 
-    wait(duration)
+    task.wait(duration)
 
     local fadeOut = TweenService:Create(textLabel, TweenInfo.new(fadeOutTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1})
     fadeOut:Play()
 
-    wait(fadeOutTime)
+    task.wait(fadeOutTime)
+
+    table.remove(activeNotifications, table.find(activeNotifications, frame))
     frame:Destroy()
+
+    for i, notif in ipairs(activeNotifications) do
+        local moveUp = TweenService:Create(notif, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -200, 0.85 - ((i - 1) * 0.07), 0)})
+        moveUp:Play()
+    end
 end
 
 return NotificationLibrary
