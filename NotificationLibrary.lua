@@ -22,7 +22,7 @@ function NotificationLibrary:Notification(text, duration, fadeOutTime)
 
     local frame = Instance.new("Frame")
     frame.Size = UDim2.new(0, 400, 0, 45)
-    frame.Position = UDim2.new(0.5, -200, 1, 0) -- Start below for smooth slide-in
+    frame.Position = UDim2.new(0.5, -200, 1, 0)
     frame.BackgroundTransparency = 1
     frame.Parent = screenGui
 
