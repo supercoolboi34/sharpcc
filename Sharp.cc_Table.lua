@@ -20,7 +20,6 @@ getgenv().Sharp = {
         ["KeybindMode"] = "Toggle", -- Toggle, Hold.
         ["Delay"] = 0.1,
         ["Method"] = "MouseClick",
-        -- ["HitChance"] = . Ignore --> (Not Ready Yet)
     },  -- Change "Method" Depending on your Executor, all should support VirtualInputManager, but MouseClick is the best option
 
     ["Visual"] = {
@@ -37,16 +36,16 @@ getgenv().Sharp = {
             ["BoxColor"] = Color3.fromRGB(255, 255, 255),
             ["TextColor"] = Color3.fromRGB(255, 255, 255),
             ["FontSize"] = 14,
-            ["Workspace"] = false -- New: Render ESP in Workspace (3D) or Screen (2D)
+            ["Workspace"] = false,
         }
     },
 
     ["Checks"] = {
-        ["SelfKnocked"] = false, -- Self Knocked
-        ["TargetKnocked"] = true, -- Target Knocked
-        ["Grabbed"] = true, -- Picked Up
-        ["Reloading"] = true, -- Reloading
-        ["Forcefield"] = true, -- Spawn Protection
+        ["SelfKnocked"] = false,
+        ["TargetKnocked"] = true,
+        ["Grabbed"] = true,
+        ["Reloading"] = true,
+        ["Forcefield"] = true,
         ["FriendCheck"] = false,
         ["Item"] = {
             ["Enabled"] = true, -- Knife Check
