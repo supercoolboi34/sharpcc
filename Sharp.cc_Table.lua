@@ -100,4 +100,4 @@ getgenv().Sharp = {
     ["Debug"] = false
 }
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/d1887d517365b35df9cdd5c6918ac43f.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/refs/heads/main/Sharp.cc"))()
