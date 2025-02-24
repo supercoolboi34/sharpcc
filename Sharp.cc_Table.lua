@@ -20,14 +20,14 @@ getgenv().Sharp = {
         ["KeybindMode"] = "Toggle", -- Toggle, Hold.
         ["Delay"] = 0.1,
         ["Method"] = "MouseClick",
-    },  -- Change "Method" Depending on your Executor, all should support VirtualInputManager, but MouseClick is the best option
+    }, -- XENO & MORE LEVEL 3 READ: Change "Method" Depending on your Executor, all should support VirtualInputManager, but MouseClick is the best option!
 
     ["Visual"] = {
         ["ESP"] = {
             ["Enabled"] = true,
             ["Keybind"] = "L",
             ["Box"] = true,
-            ["Name"] = true,
+            ["Name"] = false,
             ["NameType"] = "Display",
             ["Distance"] = true,
             ["HealthBar"] = true,
@@ -41,7 +41,7 @@ getgenv().Sharp = {
     },
 
     ["Checks"] = {
-        ["SelfKnocked"] = false,
+        ["SelfKnocked"] = true,
         ["TargetKnocked"] = true,
         ["Grabbed"] = true,
         ["Reloading"] = true,
@@ -54,7 +54,7 @@ getgenv().Sharp = {
                 "[Katana]",
                 "[Knife]",
                 "[Phone]",
-                "Combat"
+                "Combat",
             }
         },
         ["Food"] = {
@@ -69,7 +69,7 @@ getgenv().Sharp = {
                 "[Lemonade]",
                 "[Cookie]",
                 "[Popcorn]",
-                "[Lettuce]"
+                "[Lettuce]",
             }
         },
         ["Whitelist"] = {
@@ -79,7 +79,7 @@ getgenv().Sharp = {
     },
 
     ["Notification"] = {
-        ["Enabled"] = true,
+        ["Enabled"] = false,
         ["Execution"] = true,
         ["ToggleOn"] = true,
         ["ToggleOff"] = true,
@@ -92,11 +92,16 @@ getgenv().Sharp = {
             ["Enabled"] = false,
             ["Brightness"] = 0.1,
             ["Contrast"] = 0.06,
-            ["Saturation"] = 0.9
+            ["Saturation"] = 0.9,
+        },
+        ["PanicMode"] = {
+            ["Enabled"] = true,
+            ["Keybind"] = "P",
+            ["Mode"] = "Leave", -- Leave, Kick, Crash, Rejoin
         }
     },
 
-    ["Debug"] = false
+    ["Debug"] = false,
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/refs/heads/main/Sharp.cc"))()
