@@ -17,49 +17,118 @@ getgenv().Sharp = {
     ["Main"] = {
         ["Enabled"] = true,
         ["Keybind"] = "C",
-        ["KeybindMode"] = "Toggle", -- Toggle, Hold.
+        ["KeybindMode"] = "Toggle",
         ["Delay"] = 0.1,
         ["Method"] = "MouseClick",
-    }, -- XENO & MORE LEVEL 3 READ: Change "Method" Depending on your Executor, all should support VirtualInputManager, but MouseClick is the best option!
+    },
+    
+    ["HitboxExpander"] = {
+        ["Enabled"] = false,
+        ["Keybind"] = "H",
+        ["TargetKnocked"] = true,
+        ["Size"] = {
+            ["X"] = 14,
+            ["Y"] = 14,
+            ["Z"] = 14,
+        },
+        ["Visual"] = {
+            ["Enabled"] = false,
+            ["BoxColor"] = Color3.fromRGB(0, 180, 180),
+            ["Transparency"] = 0.9,
+            ["OutlineColor"] = Color3.fromRGB(0, 255, 255),
+            ["OutlineTransparency"] = 1,
+            ["Gradient"] = { -- DO NOT USE CURRENTLYS BROKEN / IN WORK
+                ["Enabled"] = false, -- DO NOT USE CURRENTLYS BROKEN / IN WORK 
+                ["TopColor"] = Color3.fromRGB(236, 236, 236), -- DO NOT USE CURRENTLYS BROKEN / IN WORK
+                ["TopTransparency"] = 0.6, -- DO NOT USE CURRENTLYS BROKEN / IN WORK
+                ["BottomColor"] = Color3.fromRGB(107, 50, 124), -- DO NOT USE CURRENTLYS BROKEN / IN WORK
+                ["BottomTransparency"] = 0.8, -- DO NOT USE CURRENTLYS BROKEN / IN WORK
+            }
+        }
+    },
 
-    ["Visual"] = {
+    ["Macro"] = {
+        ["Enabled"] = false,
+        ["Keybind"] = "V",
+        ["MS"] = 5,
+        ["Mode"] = "Hold", -- "Hold" or "Toggle"
+        ["Type"] = "First", -- "First", "Third" 
+        ["Randomization"] = {
+            ["Enabled"] = false,
+            ["MinMultiplier"] = 0.8,
+            ["MaxMultiplier"] = 1.2
+        }
+    },
+
+    ["Visuals"] = {
         ["ESP"] = {
-            ["Enabled"] = true,
+            ["Enabled"] = false,
             ["Keybind"] = "L",
-            ["Box"] = true,
-            ["Name"] = false,
+            ["Boxes"] = true,
+            ["Names"] = false,
             ["NameType"] = "Display",
             ["Distance"] = true,
             ["HealthBar"] = true,
-            ["HealthBarColor"] = Color3.fromRGB(79, 121, 66),
+            ["HealthColor"] = Color3.fromRGB(79, 121, 66),
             ["VisibilityCheck"] = false,
             ["BoxColor"] = Color3.fromRGB(255, 255, 255),
             ["TextColor"] = Color3.fromRGB(255, 255, 255),
             ["FontSize"] = 14,
             ["Workspace"] = false,
+        },
+        ["VelocityGraph"] = {
+                ["Enabled"] = false,
+                ["SelfGraph"] = true,
+                ["Text"] = false,
+                ["GraphSpeed"] = 7,
+                ["Draggable"] = true,
+                ["Smoothing"] = true,
+                ["MaxSpeed"] = 50,
+                ["LineThickness"] = 1,
+                ["LineColor"] = Color3.fromRGB(255, 255, 255),
+                ["BackgroundTransparency"] = 0,
+                ["BackgroundColor"] = Color3.fromRGB(255, 255, 255),
+                ["GraphColor"] = Color3.fromRGB(0, 255, 255),
+                ["GraphSize"] = Vector2.new(100, 50),
+                ["Position"] = Vector2.new(800, 700),
+        },
+        ["Text"] = {
+            ["Enabled"] = false,
+            ["Text"] = "Nigger.lua.sex.love.34",
+            ["Animations"] = true,
+            ["Animation"] = "Glitch", -- Options: "None", "Typing", "Fade", "Glitch", "Fade In/Out"
+            ["Smoothing"] = true,
+            ["FollowSmoothness"] = 0.15,
+            ["Color"] = Color3.fromRGB(255, 255, 0),
+            ["Font"] = Enum.Font.Gotham,
+            ["Size"] = 14,
+            ["Outline"] = true,
+            ["OutlineColor"] = Color3.fromRGB(0, 0, 0),
+            ["TypingSpeed"] = 0.07,
+            ["BackspaceSpeed"] = 0.05,
         }
     },
-
+    
     ["Checks"] = {
-        ["SelfKnocked"] = true,
+        ["SelfKnocked"] = false,
         ["TargetKnocked"] = true,
         ["Grabbed"] = true,
         ["Reloading"] = true,
         ["Forcefield"] = true,
         ["FriendCheck"] = false,
         ["Item"] = {
-            ["Enabled"] = true, -- Knife Check
+            ["Enabled"] = false,
             ["Items"] = {
                 "Wallet",
                 "[Katana]",
                 "[Knife]",
                 "[Phone]",
-                "Combat",
+                "Combat"
             }
         },
         ["Food"] = {
-            ["Enabled"] = false, -- Food Check (really not needed but yea)
-            ["Foods"] = {
+            ["Enabled"] = false,
+            ["Items"] = {
                 "[Taco]",
                 "[Hamburger]",
                 "[HotDog]",
@@ -69,15 +138,15 @@ getgenv().Sharp = {
                 "[Lemonade]",
                 "[Cookie]",
                 "[Popcorn]",
-                "[Lettuce]",
+                "[Lettuce]"
             }
         },
         ["Whitelist"] = {
             ["Enabled"] = false,
-            ["RobloxIDs"] = {123456, 123456}
+            ["IDs"] = {123456, 123456}
         }
     },
-
+    
     ["Notification"] = {
         ["Enabled"] = false,
         ["Execution"] = true,
@@ -85,7 +154,7 @@ getgenv().Sharp = {
         ["ToggleOff"] = true,
         ["ToggleESP"] = true,
     },
-
+    
     ["Misc"] = {
         ["UncapFPS"] = true,
         ["Color"] = {
@@ -94,14 +163,14 @@ getgenv().Sharp = {
             ["Contrast"] = 0.06,
             ["Saturation"] = 0.9,
         },
-        ["PanicMode"] = {
+        ["Panic"] = {
             ["Enabled"] = true,
             ["Keybind"] = "P",
-            ["Mode"] = "Leave", -- Leave, Kick, Crash, Rejoin
+            ["Mode"] = "Leave",
         }
     },
-
     ["Debug"] = false,
+    ["Stages"] = false,
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/supercoolboi34/sharpcc/refs/heads/main/Sharp.cc"))()
