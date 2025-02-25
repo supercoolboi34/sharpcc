@@ -94,7 +94,7 @@ getgenv().Sharp = {
         },
         ["Text"] = {
             ["Enabled"] = false,
-            ["Text"] = "Nigger.lua.sex.love.34",
+            ["Text"] = "discord.gg/sharpcc",
             ["Animations"] = true,
             ["Animation"] = "Glitch", -- Options: "None", "Typing", "Fade", "Glitch", "Fade In/Out"
             ["Smoothing"] = true,
